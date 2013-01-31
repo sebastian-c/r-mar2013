@@ -18,7 +18,8 @@
     src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
   </script>
   
-    <link rel="stylesheet" href = "assets/css/ribbons.css">
+    <link rel="stylesheet" href = "libraries/widgets/quiz/css/jquery-quiz.css">
+<link rel="stylesheet" href = "assets/css/ribbons.css">
 
 </head>
 <body style="opacity: 0">
@@ -68,6 +69,34 @@
   <!-- Presenter Notes -->
 </slide>
 
+      <slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Example Quiz</h2>
+  </hgroup>
+  <article>
+    <div class="quiz-single">
+    <p>How much is 2+2?</p>  
+    
+    <li class="quiz-option">1</li>
+    <li class="quiz-option">2</li>
+    <li class="quiz-option">3</li>
+    <li class="quiz-answer">4</li>
+    
+    <button class="quiz-submit">Submit</button>
+    <button class="quiz-clear">Clear</button>
+    <button class="quiz-show-answer">Show Answer</button>
+    <button class="quiz-toggle-hint">Want a hint?</button>
+    <p class="quiz-hint">Try decomposing 2 + 2 into 1 + 1 + 1 + 1.</p>
+    
+    <p class="quiz-explanation"><b>Explanation</b>: since 2 + 2 is 
+    1 + 1 + 1 + 1, 2 + 2 is also 4*1, and, since any number times one is 
+    the number itself, the answer is 4.</p>
+</div>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
 
@@ -82,6 +111,16 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
 <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery-1.7.min.js"><\/script>')</script>
 <!-- Load Javascripts for Widgets -->
+<script src='libraries/widgets/quiz/js/jquery.quiz.js'></script>
+<script src='libraries/widgets/quiz/js/mustache.min.js'></script>
+<script type="text/javascript">
+ $('.quiz').find('li:has(em)').addClass('quiz-answer')
+ $('li.quiz-answer em').replaceWith(function(){
+   return $(this).contents()
+ })
+ $('.quiz').find('li').addClass('quiz-option')
+ $.quiz();
+</script>
 <!-- LOAD HIGHLIGHTER JS FILES -->
 <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>

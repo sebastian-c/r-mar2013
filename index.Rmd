@@ -6,7 +6,7 @@ job         :
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : []            # {mathjax, quiz, bootstrap}
+widgets     : quiz            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---
 
@@ -24,4 +24,25 @@ mode        : selfcontained # {standalone, draft}
 plot(10:1, 1:10)
 ```
 
+---
 
+## Example Quiz
+
+<div class="quiz-single">
+    <p>How much is 2+2?</p>  
+    
+    <li class="quiz-option">1</li>
+    <li class="quiz-option">2</li>
+    <li class="quiz-option">3</li>
+    <li class="quiz-answer">4</li>
+    
+    <button class="quiz-submit">Submit</button>
+    <button class="quiz-clear">Clear</button>
+    <button class="quiz-show-answer">Show Answer</button>
+    <button class="quiz-toggle-hint">Want a hint?</button>
+    <p class="quiz-hint">Try decomposing 2 + 2 into 1 + 1 + 1 + 1.</p>
+    
+    <p class="quiz-explanation"><b>Explanation</b>: since 2 + 2 is 
+    1 + 1 + 1 + 1, 2 + 2 is also 4*1, and, since any number times one is 
+    the number itself, the answer is 4.</p>
+</div>
