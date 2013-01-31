@@ -1,39 +1,61 @@
 ---
 title       : R Tutorial
-subtitle    : March
-author      : Jose Padarian and Sebastian Campbell
+subtitle    : March 2013
+author      : José Padarian and Sebastian Campbell
 job         : 
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
-widgets     : quiz            # {mathjax, quiz, bootstrap}
+widgets     : quiz          # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---
 
-## Read-And-Delete
+## Welcome to R
 
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
+Hopefully by now you've started up RStudio (or your IDE or text editor of choice) and are greeted by a command prompt:
 
---- .class #id 
+![](images/rconsole.png)
 
-## Slide 2
+---
+
+## Say Hello!
+
+As is traditional in programming, we'll start off with a `Hello world!` program. Try the below:
 
 ```{r}
-plot(10:1, 1:10)
+print("Hello world!")
 ```
+
+Don't worry too much about the `[1]` at the beginning, we'll explain that soon.
+
+Note that you can also type `"Hello world!"` without the `print` command and R will assume you meant to print it.
+
+---
+
+## Some basic maths
+
+We can also use R as a calculator for addition and powers:
+
+```{r}
+2 + 2
+2 ^ 3
+```
+
+Note that there are other operators we can use, like `*` for multiplications, `-` for subtraction and `/` for division. 
 
 ---&radio .quiz
 
-## Markdown quiz
-In order to determine if smoking causes cancer, researchers surveyed a large sample of adults.  For each adult, they recorded whether the person had smoked regularly at any period in their life and whether the person had cancer.  They then compared the proportion of cancer cases in those who had smoked regularly at some time in their life with the proportion of cases in those who had never smoked regularly at any point in their life.  The researchers found a higher proportion of cancer cases among those who had smoked regularly than among those who had never smoked regularly. This is:
+## Quick quiz
 
-1. _an observational study._
-2. a double blind experiment.
-3. a block design.
-4. an experiment, but not a double blind experiment.
+We'll be having a few quizzes like this during this tutorial. No pressure, it's just to check your understanding.
+
+### What is the expected result from `4 / 2`?
+
+1. 1
+2. _2_
+3. 3
+4. 4
 
 *** explanation
 
-It is an *observational study* since the researchers did not control the explanatory variable: smoker.
+It's 2, because 4 ÷ 2 = 2

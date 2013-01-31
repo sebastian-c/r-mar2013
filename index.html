@@ -4,7 +4,7 @@
   <title>R Tutorial</title>
   <meta charset="utf-8">
   <meta name="description" content="R Tutorial">
-  <meta name="author" content="Jose Padarian and Sebastian Campbell">
+  <meta name="author" content="José Padarian and Sebastian Campbell">
   <meta name="generator" content="slidify" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -34,55 +34,87 @@
     <slide class="title-slide segue nobackground">
       <hgroup class="auto-fadein">
         <h1>R Tutorial</h1>
-        <h2>March</h2>
-        <p>Jose Padarian and Sebastian Campbell<br/></p>
+        <h2>March 2013</h2>
+        <p>José Padarian and Sebastian Campbell<br/></p>
       </hgroup>
           </slide>
 
     <!-- SLIDES -->
       <slide class="" id="slide-1" style="background:;">
   <hgroup>
-    <h2>Read-And-Delete</h2>
+    <h2>Welcome to R</h2>
   </hgroup>
   <article>
-    <ol>
-<li>Edit YAML front matter</li>
-<li>Write using R Markdown</li>
-<li>Use an empty line followed by three dashes to separate slides!</li>
-</ol>
+    <p>Hopefully by now you&#39;ve started up RStudio (or your IDE or text editor of choice) and are greeted by a command prompt:</p>
+
+<p><img src="images/rconsole.png" alt=""></p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="class" id="id" style="background:;">
+      <slide class="" id="slide-2" style="background:;">
   <hgroup>
-    <h2>Slide 2</h2>
+    <h2>Say Hello!</h2>
   </hgroup>
   <article>
-    <pre><code class="r">plot(10:1, 1:10)
+    <p>As is traditional in programming, we&#39;ll start off with a <code>Hello world!</code> program. Try the below:</p>
+
+<pre><code class="r">print(&quot;Hello world!&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-1.png" alt="plot of chunk unnamed-chunk-1"> </p>
+<pre><code>## [1] &quot;Hello world!&quot;
+</code></pre>
+
+<p>Don&#39;t worry too much about the <code>[1]</code> at the beginning, we&#39;ll explain that soon.</p>
+
+<p>Note that you can also type <code>&quot;Hello world!&quot;</code> without the <code>print</code> command and R will assume you meant to print it.</p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="quiz" id="slide-3" style="background:;">
+      <slide class="" id="slide-3" style="background:;">
   <hgroup>
-    <h2>Markdown quiz</h2>
+    <h2>Some basic maths</h2>
+  </hgroup>
+  <article>
+    <p>We can also use R as a calculator for addition and powers:</p>
+
+<pre><code class="r">2 + 2
+</code></pre>
+
+<pre><code>## [1] 4
+</code></pre>
+
+<pre><code class="r">2^3
+</code></pre>
+
+<pre><code>## [1] 8
+</code></pre>
+
+<p>Note that there are other operators we can use, like <code>*</code> for multiplications, <code>-</code> for subtraction and <code>/</code> for division. </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="quiz" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Quick quiz</h2>
   </hgroup>
   <article>
     
 <div class="quiz-single well new">
-  <p>In order to determine if smoking causes cancer, researchers surveyed a large sample of adults.  For each adult, they recorded whether the person had smoked regularly at any period in their life and whether the person had cancer.  They then compared the proportion of cancer cases in those who had smoked regularly at some time in their life with the proportion of cases in those who had never smoked regularly at any point in their life.  The researchers found a higher proportion of cancer cases among those who had smoked regularly than among those who had never smoked regularly. This is:</p>
+  <p>We&#39;ll be having a few quizzes like this during this tutorial. No pressure, it&#39;s just to check your understanding.</p>
+
+<h3>What is the expected result from <code>4 / 2</code>?</h3>
 
 <ol>
-<li><em>an observational study.</em></li>
-<li>a double blind experiment.</li>
-<li>a block design.</li>
-<li>an experiment, but not a double blind experiment.</li>
+<li>1</li>
+<li><em>2</em></li>
+<li>3</li>
+<li>4</li>
 </ol>
 
 
@@ -98,7 +130,7 @@
   </div>
   
   <div class="quiz-explanation">
-    <p>It is an <em>observational study</em> since the researchers did not control the explanatory variable: smoker.</p>
+    <p>It&#39;s 2, because 4 ÷ 2 = 2</p>
 
   </div>
 </div>
