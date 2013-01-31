@@ -3,11 +3,11 @@ title       : R Tutorial
 subtitle    : March 2013
 author      : José Padarian and Sebastian Campbell
 job         : 
-framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
-highlighter : highlight.js  # {highlight.js, prettify, highlight}
-hitheme     : tomorrow      # 
-widgets     : quiz          # {mathjax, quiz, bootstrap}
-mode        : selfcontained # {standalone, draft}
+framework   : io2012          # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js    # {highlight.js, prettify, highlight}
+hitheme     : tomorrow        # 
+widgets     : [mathjax, quiz] # {mathjax, quiz, bootstrap}
+mode        : selfcontained   # {standalone, draft}
 ---
 
 ## Welcome to R
@@ -49,13 +49,17 @@ Note that there are other operators we can use, like `*` for multiplications, `-
 
 We'll be having a few quizzes like this during this tutorial. No pressure, it's just to check your understanding.
 
-### What is the expected result from `4 / 2`?
+### What is the expected result from `6 / 2`?
 
 1. 1
-2. _2_
-3. 3
+2. 2
+3. _3_
 4. 4
 
 *** explanation
 
-It's 2, because 4 ÷ 2 = 2
+It's 3, because $\frac{6}{2} = 3$
+
+---
+
+## Assigning variables
