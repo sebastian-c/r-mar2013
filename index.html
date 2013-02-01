@@ -241,7 +241,61 @@ bulk_density
     <h2>Bigger data</h2>
   </hgroup>
   <article>
-    <p>So we&#39;ve been dealing with</p>
+    <p>So we&#39;ve been dealing with individual strings and numbers, let&#39;s move onto combining those into vectors. A vector is basically just a 1-dimensional array of data. Like a set of numbers or a shopping list. It&#39;s really easy to make vectors of sequential integers:</p>
+
+<pre><code class="r">1:10
+</code></pre>
+
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10
+</code></pre>
+
+<pre><code class="r">5:-5
+</code></pre>
+
+<pre><code>##  [1]  5  4  3  2  1  0 -1 -2 -3 -4 -5
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>More vectors</h2>
+  </hgroup>
+  <article>
+    <p>You can also make vectors of strings or numbers using the combine (<code>c</code>) function:</p>
+
+<pre><code class="r">c(5, 4, 3, 2, 8)
+</code></pre>
+
+<pre><code>## [1] 5 4 3 2 8
+</code></pre>
+
+<pre><code class="r">c(&quot;sand&quot;, &quot;silt&quot;, &quot;clay&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;sand&quot; &quot;silt&quot; &quot;clay&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Limits of atomic vectors</h2>
+  </hgroup>
+  <article>
+    <p>But be careful. These kinds of vectors can only take one type of data. If you combine numbers and strings together:</p>
+
+<pre><code class="r">c(&quot;SOILID001&quot;, 3, 5, &quot;SOILID006&quot;, 7)
+</code></pre>
+
+<pre><code>## [1] &quot;SOILID001&quot; &quot;3&quot;         &quot;5&quot;         &quot;SOILID006&quot; &quot;7&quot;
+</code></pre>
+
+<p>Then they all become characters.</p>
 
   </article>
   <!-- Presenter Notes -->

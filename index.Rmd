@@ -119,4 +119,32 @@ The first option. The second option won't work as there's only one string, so R 
 
 ## Bigger data
 
-So we've been dealing with
+So we've been dealing with individual strings and numbers, let's move onto combining those into vectors. A vector is basically just a 1-dimensional array of data. Like a set of numbers or a shopping list. It's really easy to make vectors of sequential integers:
+
+```{r}
+1:10
+5:-5
+```
+
+---
+
+## More vectors
+
+You can also make vectors of strings or numbers using the combine (`c`) function:
+
+```{r}
+c(5, 4, 3, 2, 8)
+c("sand", "silt", "clay")
+```
+
+---
+
+## Limits of atomic vectors
+
+But be careful. These kinds of vectors can only take one type of data. If you combine numbers and strings together:
+
+```{r}
+c("SOILID001", 3, 5, "SOILID006", 7)
+```
+
+Then they all become characters.
