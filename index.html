@@ -301,6 +301,108 @@ bulk_density
   <!-- Presenter Notes -->
 </slide>
 
+      <slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Getting help</h2>
+  </hgroup>
+  <article>
+    <p>But how do I find out about all these functions? There are a few ways of getting help in R:</p>
+
+<ul>
+<li>The default help functions. Try <code>?print</code> or <code>help(print)</code></li>
+<li>Other help functions: <code>RSiteSearch(&quot;soil&quot;)</code></li>
+<li>StackOverflow</li>
+<li>The wonderful Google</li>
+</ul>
+
+<p>At the moment, the help files will be fairly hard to get through, but they make more and more sense the more you use R. Some help files will be much simpler than others. If you find the help file impossible to get through, try testing the examples at the bottom of most help files or access them using the <code>examples</code> function.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="quiz" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Getting help quiz</h2>
+  </hgroup>
+  <article>
+    
+<div class="quiz-single well new">
+  <h3>What does the <code>sep</code> argument of <code>read.table</code> do?</h3>
+
+<ol>
+<li>Separates the arguments with commas and puts them together</li>
+<li><em>Determines the field separator character of a file which has been read in</em></li>
+<li>Decides whether to use the Sepine Angulator algorithm</li>
+<li>If TRUE, splits files into list elements</li>
+</ol>
+
+
+  
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear">Clear</button>
+  
+  
+  <div class="quiz-hint">
+    
+  </div>
+  
+  <div class="quiz-explanation">
+    <p>The <code>read.table</code> function entry found using <code>?read.table</code> or <code>help(read.table)</code> says <code>sep</code> is the &#39;field separator character&#39;.</p>
+
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Dataframes</h2>
+  </hgroup>
+  <article>
+    <p>Now we&#39;re ready to deal with some real data. The University of Alaska Fairbanks has some soil temperature data from 2011. The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
+
+<pre><code class="r">url &lt;- &quot;http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/data/DFM1_South_White_Hills_Soil_2011.csv&quot;
+soiltempdata &lt;- read.csv(url)
+</code></pre>
+
+<p>That looks like it went through nicely. No errors, no complaints.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Checking your data</h2>
+  </hgroup>
+  <article>
+    <p>It&#39;s a good idea to look at the first few rows of your data, to make sure it went through ok. We&#39;ll use <code>head</code> to get the first 4 rows of ours.</p>
+
+<pre><code class="r">head(soiltempdata, 4)
+</code></pre>
+
+<pre><code>##   X2011.South.White.Hills..DFM1..Met.SITE X X.1 X.2 X.3 X.4 X.5 X.6 X.7
+## 1                              SOIL DATA                               
+## 2                      Lat: 69° 12.043&#39; N                              
+## 3                    Long: 149° 33.508&#39; W                              
+## 4                        Elev: 293 meters                              
+##   X.8 X.9 X.10 X.11 X.12 X.13 X.14 X.15 X.16 X.17 X.18
+## 1                                                   NA
+## 2                                                   NA
+## 3                                                   NA
+## 4                                                   NA
+</code></pre>
+
+<p>Blech. That&#39;s not what we wanted at all. Most of those columns are empty.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
     <slide class="backdrop"></slide>
   </slides>
 
