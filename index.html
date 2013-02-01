@@ -66,9 +66,9 @@
 <pre><code>## [1] &quot;Hello world!&quot;
 </code></pre>
 
-<p>Don&#39;t worry too much about the <code>[1]</code> at the beginning, we&#39;ll explain that soon.</p>
+<p>Congratulations! You&#39;ve taken your first steps into R. You&#39;ve used the function <code>print</code> to print the text &quot;Hello world!&quot; to the screen. Functions are basically like verbs in language, they tell R to do something. Notice the brackets <code>()</code> after the name of the function in which you can tell the function what to do.</p>
 
-<p>Note that you can also type <code>&quot;Hello world!&quot;</code> without the <code>print</code> command and R will assume you meant to print it.</p>
+<p>Don&#39;t worry too much about the <code>[1]</code> at the beginning, we&#39;ll explain that soon. Note that you can also type <code>&quot;Hello world!&quot;</code> without the <code>print</code> command and R will assume you meant to print it.</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -143,7 +143,106 @@
     <h2>Assigning variables</h2>
   </hgroup>
   <article>
+    <p>So now we can do some maths, but we don&#39;t want to have to remember the results every time. So let&#39;s store some as variable, so we can refer to them by name. To assign, we can use either the <code>=</code> or <code>&lt;-</code> operator (though <code>&lt;-</code> is recommended).</p>
+
+<pre><code class="r">core_volume &lt;- 100
+core_mass &lt;- 180
+bulk_density &lt;- core_mass/core_volume
+
+bulk_density
+</code></pre>
+
+<pre><code>## [1] 1.8
+</code></pre>
+
+<p>Note that assignment doesn&#39;t print the variable to the console.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Not just numbers</h2>
+  </hgroup>
+  <article>
+    <p>R doesn&#39;t just work with numbers, it can also work with &quot;strings&quot; or characters. We&#39;ve already used these when we made our &quot;Hello world!&quot; program. In fact, we can use the <code>paste</code> function to stick them together. </p>
+
+<pre><code class="r">paste(&quot;The bulk density is:&quot;, 1.75, sep = &quot; &quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;The bulk density is: 1.75&quot;
+</code></pre>
+
+<p>The <code>paste</code> function sticks strings and numbers together into a single string. The <code>sep</code> argument says: &quot;Put a space between all of the things I&#39;m sticking together&quot;.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Making readable results</h2>
+  </hgroup>
+  <article>
+    <p>Let&#39;s combine all the things we know so far into something useful. Remember the bulk density we calculated earlier?</p>
+
+<pre><code class="r">paste(&quot;The bulk density is:&quot;, bulk_density, sep = &quot; &quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;The bulk density is: 1.8&quot;
+</code></pre>
+
+<p>Here R evaluated our variable <code>bulk_density</code> and added it to the string we were trying to make.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="quiz" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Quiz 2</h2>
+  </hgroup>
+  <article>
     
+<div class="quiz-single well new">
+  <h3>Which of these lines of code will produce the result: <code>&quot;1:2:3:x:y:z&quot;</code></h3>
+
+<ol>
+<li><em>paste(1, 2, 3, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;, sep=&quot;:&quot;)</em></li>
+<li>paste(&quot;123xyz&quot;, sep=&quot;:&quot;)</li>
+<li>paste(1, 2, 3, x, y, z, sep=&quot;:&quot;)</li>
+<li>paste(1, 2, 3, &quot;x&quot;, &quot;y&quot;, &quot;z&quot;)</li>
+</ol>
+
+
+  
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear">Clear</button>
+  
+  
+  <div class="quiz-hint">
+    
+  </div>
+  
+  <div class="quiz-explanation">
+    <p>The first option. The second option won&#39;t work as there&#39;s only one string, so R can&#39;t place separators between strings. The third option is trying to call variables named <code>x</code>, <code>y</code> and <code>z</code> (but it&#39;s likely none exist). Finally, the fourth option is space-separated, not colon-separated.</p>
+
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Bigger data</h2>
+  </hgroup>
+  <article>
+    <p>So we&#39;ve been dealing with</p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>

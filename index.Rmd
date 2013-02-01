@@ -26,9 +26,9 @@ As is traditional in programming, we'll start off with a `Hello world!` program.
 print("Hello world!")
 ```
 
-Don't worry too much about the `[1]` at the beginning, we'll explain that soon.
+Congratulations! You've taken your first steps into R. You've used the function `print` to print the text "Hello world!" to the screen. Functions are basically like verbs in language, they tell R to do something. Notice the brackets `()` after the name of the function in which you can tell the function what to do.
 
-Note that you can also type `"Hello world!"` without the `print` command and R will assume you meant to print it.
+Don't worry too much about the `[1]` at the beginning, we'll explain that soon. Note that you can also type `"Hello world!"` without the `print` command and R will assume you meant to print it.
 
 ---
 
@@ -63,3 +63,60 @@ It's 3, because $\frac{6}{2} = 3$
 ---
 
 ## Assigning variables
+
+So now we can do some maths, but we don't want to have to remember the results every time. So let's store some as variable, so we can refer to them by name. To assign, we can use either the `=` or `<-` operator (though `<-` is recommended).
+
+```{r}
+core_volume <- 100
+core_mass <- 180
+bulk_density <- core_mass / core_volume
+
+bulk_density
+```
+
+Note that assignment doesn't print the variable to the console.
+
+---
+
+## Not just numbers
+
+R doesn't just work with numbers, it can also work with "strings" or characters. We've already used these when we made our "Hello world!" program. In fact, we can use the `paste` function to stick them together. 
+
+```{r}
+paste("The bulk density is:", 1.75, sep=" ")
+```
+
+The `paste` function sticks strings and numbers together into a single string. The `sep` argument says: "Put a space between all of the things I'm sticking together".
+
+---
+
+## Making readable results
+
+Let's combine all the things we know so far into something useful. Remember the bulk density we calculated earlier?
+
+```{r}
+paste("The bulk density is:", bulk_density, sep=" ")
+```
+
+Here R evaluated our variable `bulk_density` and added it to the string we were trying to make.
+
+---&radio .quiz
+
+## Quiz 2
+
+### Which of these lines of code will produce the result: `"1:2:3:x:y:z"`
+
+1. _paste(1, 2, 3, "x", "y", "z", sep=":")_
+2. paste("123xyz", sep=":")
+3. paste(1, 2, 3, x, y, z, sep=":")
+4. paste(1, 2, 3, "x", "y", "z")
+
+*** explanation
+
+The first option. The second option won't work as there's only one string, so R can't place separators between strings. The third option is trying to call variables named `x`, `y` and `z` (but it's likely none exist). Finally, the fourth option is space-separated, not colon-separated.
+
+---
+
+## Bigger data
+
+So we've been dealing with
