@@ -183,7 +183,7 @@ At the moment, the help files will be fairly hard to get through, but they make 
 
 Now we're ready to deal with some real data. The University of Alaska Fairbanks has some soil temperature data from 2011. The best function to read in CSVs is `read.csv`. Let's store that object and call it `soiltempdata`. 
 
-```{r}
+```{r, cache=TRUE}
 url <- "http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/data/DFM1_South_White_Hills_Soil_2011.csv"
 soiltempdata <- read.csv(url)
 ```
@@ -204,6 +204,6 @@ Blech. That's not what we wanted at all. Most of those columns are empty.
 
 ## Fixing the data
 
-What went wrong? Let's download the data and open the data up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click [here](http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html) for a link to their website and download the 2011 Soil Data File to your hard drive (put it into My Documents). Then open the CSV file.
+What went wrong? Let's download the data and open the data up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click [here](http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html) for a link to their website and download the 2011 Soil Data File to your hard drive (put it into My Documents). Then open the CSV file (if you're feeling adventurous, try using the `download.file` function to download it).
 
 ![]()
