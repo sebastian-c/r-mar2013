@@ -166,7 +166,7 @@ bulk_density
     <h2>Not just numbers</h2>
   </hgroup>
   <article>
-    <p>R doesn&#39;t just work with numbers, it can also work with &quot;strings&quot; or characters. We&#39;ve already used these when we made our &quot;Hello world!&quot; program. In fact, we can use the <code>paste</code> function to stick them together. </p>
+    <p>R doesn&#39;t just work with numbers, it can also work with &quot;strings&quot; or characters. Strings are denoted by the quotes (<code>&quot;&quot;</code>) surrounding them. We&#39;ve already used these when we made our &quot;Hello world!&quot; program. In fact, we can use the <code>paste</code> function to stick them together. </p>
 
 <pre><code class="r">paste(&quot;The bulk density is:&quot;, 1.75, sep = &quot; &quot;)
 </code></pre>
@@ -297,6 +297,8 @@ bulk_density
 
 <p>Then they all become characters.</p>
 
+<p>If you think about it, you can treat numbers as letters, but it&#39;s a lot harder to treat letters as numbers.</p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -328,7 +330,7 @@ bulk_density
   <article>
     
 <div class="quiz-single well new">
-  <h3>What does the <code>sep</code> argument of <code>read.table</code> do?</h3>
+  <h3>What does the <code>sep</code> argument of <code>read.csv</code> do?</h3>
 
 <ol>
 <li>Separates the arguments with commas and puts them together</li>
@@ -350,7 +352,7 @@ bulk_density
   </div>
   
   <div class="quiz-explanation">
-    <p>The <code>read.table</code> function entry found using <code>?read.table</code> or <code>help(read.table)</code> says <code>sep</code> is the &#39;field separator character&#39;.</p>
+    <p>The <code>read.csv</code> function entry found using <code>?read.csv</code> or <code>help(read.csv)</code> says <code>sep</code> is the &#39;field separator character&#39;.</p>
 
   </div>
 </div>
@@ -365,7 +367,7 @@ bulk_density
   <article>
     <p>Now we&#39;re ready to deal with some real data. The University of Alaska Fairbanks has some soil temperature data from 2011. The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
 
-<pre><code class="r">url &lt;- &quot;http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/data/DFM1_South_White_Hills_Soil_2011.csv&quot;
+<pre><code class="r">url &lt;- &quot;https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv&quot;
 soiltempdata &lt;- read.csv(url)
 </code></pre>
 
@@ -385,25 +387,221 @@ soiltempdata &lt;- read.csv(url)
 <pre><code class="r">head(soiltempdata, 4)
 </code></pre>
 
-<pre><code>##   X2011.South.White.Hills..DFM1..Met.SITE X X.1 X.2 X.3 X.4 X.5 X.6 X.7
-## 1                              SOIL DATA                               
-## 2                      Lat: 69° 12.043&#39; N                              
-## 3                    Long: 149° 33.508&#39; W                              
-## 4                        Elev: 293 meters                              
-##   X.8 X.9 X.10 X.11 X.12 X.13 X.14 X.15 X.16 X.17 X.18
-## 1                                                   NA
-## 2                                                   NA
-## 3                                                   NA
-## 4                                                   NA
+<pre><code>##   COL.                         DATA.TYPE X X.1 X.2 X.3 X.4 X.5 X.6 X.7 X.8
+## 1    1                   Date Time (AST)                                  
+## 2    2  0-cm Depth Soil Temperature (°C)                                  
+## 3    3  5-cm Depth Soil Temperature (°C)                                  
+## 4    4 10-cm Depth Soil Temperature (°C)                                  
+##   X.9 X.10 X.11 X.12 X.13 X.14
+## 1            NA   NA   NA   NA
+## 2            NA   NA   NA   NA
+## 3            NA   NA   NA   NA
+## 4            NA   NA   NA   NA
 </code></pre>
 
 <p>Blech. That&#39;s not what we wanted at all. Most of those columns are empty.</p>
 
-<h2>Fixing the data</h2>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
 
-<p>What went wrong? Let&#39;s download the data and open the data up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click <a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html">here</a> for a link to their website and download the 2011 Soil Data File to your hard drive (put it into My Documents). Then open the CSV file.</p>
+      <slide class="" id="slide-16" style="background:;">
+  <hgroup>
+    <h2>Fixing the data</h2>
+  </hgroup>
+  <article>
+    <p>What went wrong? Let&#39;s download the data and open it up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click <a href="https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv">here</a> to link to the data (if you&#39;re feeling adventurous, try using the <code>download.file</code> function to download it). Save it to your hard drive (put it into My Documents). Then open the CSV file.</p>
 
-<p>[]()</p>
+<p><img src="images/headsoiltempdata.png" height="300px"></p>
+
+<p>Well there&#39;s the problem, there&#39;s all this other stuff before we get to the actual data.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-17" style="background:;">
+  <hgroup>
+    <h2>Getting to work</h2>
+  </hgroup>
+  <article>
+    <p>Set your working directory to where you stored the data. You can use the <code>getwd</code> function to work out what directory you&#39;re in and the <code>setwd</code> function to set the working directory. Remember to use forward slashes (<code>/</code>) as the path separator.</p>
+
+<pre><code class="r">getwd()
+</code></pre>
+
+<pre><code>## [1] &quot;C:/Research/&quot;
+</code></pre>
+
+<pre><code class="r">setwd(&quot;C:/Users/Sebastian/Documents&quot;)
+</code></pre>
+
+<pre><code class="r">getwd()
+</code></pre>
+
+<pre><code>## [1] &quot;C:/Users/Sebastian/Documents&quot;
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="quiz" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Skipping the first few lines</h2>
+  </hgroup>
+  <article>
+    
+<div class="quiz-single well new">
+  <p>Ok, so we had a problem with the data before, let&#39;s see if we can read it in properly this time. So the first problem is that we have a few lines before we get to the data. We could remove these manually, but R has a neat trick to sort this problem out, the <code>skip</code> argument in <code>read.csv</code>. </p>
+
+<h3>How many lines (rows) do we have to skip?</h3>
+
+<ol>
+<li>1</li>
+<li>13</li>
+<li><em>16</em></li>
+<li>17</li>
+</ol>
+
+
+  
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear">Clear</button>
+  
+  
+  <div class="quiz-hint">
+    
+  </div>
+  
+  <div class="quiz-explanation">
+    <p>There are <strong>16</strong> lines we have to skip (not 17, we want to keep the headers).</p>
+
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Reading in the data</h2>
+  </hgroup>
+  <article>
+    <p>Now after all these problems, we can finally read in the data and store it as an object. We can see it actually has columns we want.</p>
+
+<pre><code class="r">soiltempdata &lt;- read.csv(&quot;soiltempdata.csv&quot;, skip = 16)
+head(soiltempdata, 3)
+</code></pre>
+
+<pre><code>##   Date.Time..AST. X0.cm.Depth.Soil.Temperature....
+## 1  1/01/2011 0:00                           -6.752
+## 2  1/01/2011 1:00                           -6.727
+## 3  1/01/2011 2:00                           -6.726
+##   X5.cm.Depth.Soil.Temperature.... X10.cm.Depth.Soil.Temperature....
+## 1                           -4.940                            -5.061
+## 2                           -4.916                            -5.098
+## 3                           -4.916                            -5.098
+##   X15.cm.Depth.Soil.Temperature.... X20.cm.Depth.Soil.Temperature....
+## 1                            -4.401                            -3.698
+## 2                            -4.378                            -3.733
+## 3                            -4.377                            -3.733
+##   X40.cm.Depth.Soil.Temperature.... X60.cm.Depth.Soil.Temperature....
+## 1                            -2.014                             0.041
+## 2                            -1.993                             0.010
+## 3                            -1.992                             0.010
+##   X80.cm.Depth.Soil.Temperature.... X100.cm.Depth.Soil.Temperature....
+## 1                            -0.215                               7777
+## 2                            -0.195                               7777
+## 3                            -0.195                               7777
+##   X120.cm.Depth.Soil.Temperature.... X135.cm.Depth.Soil.Temperature....
+## 1                             -0.525                             -0.577
+## 2                             -0.505                             -0.608
+## 3                             -0.504                             -0.608
+##   X150.cm.Depth.Soil.Temperature....
+## 1                             -0.995
+## 2                             -1.028
+## 3                             -1.027
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Structure of objects</h2>
+  </hgroup>
+  <article>
+    <p>Another way of examining objects is the <code>str</code> function.</p>
+
+<pre><code class="r">str(soiltempdata)
+</code></pre>
+
+<pre><code>## &#39;data.frame&#39;:    6552 obs. of  13 variables:
+##  $ Date.Time..AST.                   : Factor w/ 6552 levels &quot;1/01/2011 0:00&quot;,..: 1 2 13 18 19 20 21 22 23 24 ...
+##  $ X0.cm.Depth.Soil.Temperature....  : num  -6.75 -6.73 -6.73 -6.65 -6.67 ...
+##  $ X5.cm.Depth.Soil.Temperature....  : num  -4.94 -4.92 -4.92 -4.91 -4.86 ...
+##  $ X10.cm.Depth.Soil.Temperature.... : num  -5.06 -5.1 -5.1 -5.03 -5.04 ...
+##  $ X15.cm.Depth.Soil.Temperature.... : num  -4.4 -4.38 -4.38 -4.37 -4.38 ...
+##  $ X20.cm.Depth.Soil.Temperature.... : num  -3.7 -3.73 -3.73 -3.72 -3.68 ...
+##  $ X40.cm.Depth.Soil.Temperature.... : num  -2.01 -1.99 -1.99 -2.04 -2.05 ...
+##  $ X60.cm.Depth.Soil.Temperature.... : num  0.041 0.01 0.01 0.02 0.004 0.04 0.078 0.071 0.055 0.05 ...
+##  $ X80.cm.Depth.Soil.Temperature.... : num  -0.215 -0.195 -0.195 -0.236 -0.2 -0.165 -0.177 -0.184 -0.201 -0.205 ...
+##  $ X100.cm.Depth.Soil.Temperature....: int  7777 7777 7777 7777 7777 7777 7777 7777 7777 7777 ...
+##  $ X120.cm.Depth.Soil.Temperature....: num  -0.525 -0.505 -0.504 -0.546 -0.51 -0.526 -0.487 -0.494 -0.511 -0.515 ...
+##  $ X135.cm.Depth.Soil.Temperature....: num  -0.577 -0.608 -0.608 -0.598 -0.614 -0.578 -0.591 -0.598 -0.615 -0.619 ...
+##  $ X150.cm.Depth.Soil.Temperature....: num  -0.995 -1.028 -1.027 -1.017 -0.98 ...
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h2>Yet another problem</h2>
+  </hgroup>
+  <article>
+    <p>Something still isn&#39;t right. Look at the 100cm depth soil temperature from the previous slide. Note that you can use the <code>$</code> symbol to subset out individual columns.</p>
+
+<pre><code class="r">str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+</code></pre>
+
+<pre><code>##  int [1:6552] 7777 7777 7777 7777 7777 7777 7777 7777 7777 7777 ...
+</code></pre>
+
+<p>There is no way that there is a soil with a temperature of 7777 degrees celsius. So why is that present? Well, if we reopen the data in Excel or Notepad, we&#39;ll see there were two important lines: </p>
+
+<ul>
+<li>NOTE:,6999 DENOTES MISSING DATA OR INVALID DATA</li>
+<li>,7777 DENOTES UNCOLLECTED DATA </li>
+</ul>
+
+<p>So it would seem that anything with these values should be a missing value. Turns out R has a trick for that too. Let&#39;s reread in the data again (last time, I promise).</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-22" style="background:;">
+  <hgroup>
+    <h2>na.strings</h2>
+  </hgroup>
+  <article>
+    <p>If we look at the help file for <code>read.csv</code> (<code>?read.csv</code>), we see there&#39;s an argument called <code>na.strings</code>. We have two things we need to be NA, so we combine them like we did a few slides ago: <code>c(6999, 7777)</code>.</p>
+
+<pre><code class="r">soiltempdata &lt;- read.csv(&quot;soiltempdata.csv&quot;, skip = 16, na.strings = c(6999, 
+    7777))
+str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+</code></pre>
+
+<pre><code>##  logi [1:6552] NA NA NA NA NA NA ...
+</code></pre>
+
+<p>And now it&#39;s full of NAs (missing values), as it should be.</p>
 
   </article>
   <!-- Presenter Notes -->

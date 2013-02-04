@@ -80,7 +80,7 @@ Note that assignment doesn't print the variable to the console.
 
 ## Not just numbers
 
-R doesn't just work with numbers, it can also work with "strings" or characters. We've already used these when we made our "Hello world!" program. In fact, we can use the `paste` function to stick them together. 
+R doesn't just work with numbers, it can also work with "strings" or characters. Strings are denoted by the quotes (`""`) surrounding them. We've already used these when we made our "Hello world!" program. In fact, we can use the `paste` function to stick them together. 
 
 ```{r}
 paste("The bulk density is:", 1.75, sep=" ")
@@ -149,6 +149,8 @@ c("SOILID001", 3, 5, "SOILID006", 7)
 
 Then they all become characters.
 
+If you think about it, you can treat numbers as letters, but it's a lot harder to treat letters as numbers.
+
 ---
 
 ## Getting help
@@ -166,7 +168,7 @@ At the moment, the help files will be fairly hard to get through, but they make 
 
 ## Getting help quiz
 
-### What does the `sep` argument of `read.table` do?
+### What does the `sep` argument of `read.csv` do?
 
  1. Separates the arguments with commas and puts them together
  2. _Determines the field separator character of a file which has been read in_
@@ -175,7 +177,7 @@ At the moment, the help files will be fairly hard to get through, but they make 
  
 *** explanation
 
- The `read.table` function entry found using `?read.table` or `help(read.table)` says `sep` is the 'field separator character'.
+ The `read.csv` function entry found using `?read.csv` or `help(read.csv)` says `sep` is the 'field separator character'.
 
 ---
 
@@ -184,7 +186,7 @@ At the moment, the help files will be fairly hard to get through, but they make 
 Now we're ready to deal with some real data. The University of Alaska Fairbanks has some soil temperature data from 2011. The best function to read in CSVs is `read.csv`. Let's store that object and call it `soiltempdata`. 
 
 ```{r, cache=TRUE}
-url <- "http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/data/DFM1_South_White_Hills_Soil_2011.csv"
+url <- "https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv"
 soiltempdata <- read.csv(url)
 ```
 
@@ -202,8 +204,102 @@ head(soiltempdata, 4)
 
 Blech. That's not what we wanted at all. Most of those columns are empty.
 
+---
+
 ## Fixing the data
 
-What went wrong? Let's download the data and open the data up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click [here](http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html) for a link to their website and download the 2011 Soil Data File to your hard drive (put it into My Documents). Then open the CSV file (if you're feeling adventurous, try using the `download.file` function to download it).
+What went wrong? Let's download the data and open it up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click [here](https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv) to link to the data (if you're feeling adventurous, try using the `download.file` function to download it). Save it to your hard drive (put it into My Documents). Then open the CSV file.
 
-![]()
+<img src="images/headsoiltempdata.png" height="300px">
+
+Well there's the problem, there's all this other stuff before we get to the actual data.
+
+---
+
+## Getting to work
+
+Set your working directory to where you stored the data. You can use the `getwd` function to work out what directory you're in and the `setwd` function to set the working directory. Remember to use forward slashes (`/`) as the path separator.
+
+```{r, echo=TRUE, eval=FALSE}
+getwd()
+```
+```
+## [1] "C:/Research/"
+```
+```{r, echo=TRUE, eval=FALSE}
+setwd("C:/Users/Sebastian/Documents")
+```
+```{r, echo=TRUE, eval=FALSE}
+getwd()
+```
+```
+## [1] "C:/Users/Sebastian/Documents"
+```
+
+---&radio .quiz
+
+## Skipping the first few lines
+
+Ok, so we had a problem with the data before, let's see if we can read it in properly this time. So the first problem is that we have a few lines before we get to the data. We could remove these manually, but R has a neat trick to sort this problem out, the `skip` argument in `read.csv`. 
+
+### How many lines (rows) do we have to skip?
+
+1. 1
+2. 13
+3. _16_
+4. 17
+
+*** explanation
+
+There are **16** lines we have to skip (not 17, we want to keep the headers).
+
+---
+
+## Reading in the data
+
+Now after all these problems, we can finally read in the data and store it as an object. We can see it actually has columns we want.
+
+```{r}
+soiltempdata <- read.csv("soiltempdata.csv", skip=16)
+head(soiltempdata, 3)
+```
+
+---
+
+## Structure of objects
+
+Another way of examining objects is the `str` function.
+
+```{r}
+str(soiltempdata)
+```
+
+---
+
+## Yet another problem
+
+Something still isn't right. Look at the 100cm depth soil temperature from the previous slide. Note that you can use the `$` symbol to subset out individual columns.
+
+```{r}
+str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+```
+
+There is no way that there is a soil with a temperature of 7777 degrees celsius. So why is that present? Well, if we reopen the data in Excel or Notepad, we'll see there were two important lines: 
+
+- NOTE:,6999 DENOTES MISSING DATA OR INVALID DATA
+- ,7777 DENOTES UNCOLLECTED DATA 
+
+So it would seem that anything with these values should be a missing value. Turns out R has a trick for that too. Let's reread in the data again (last time, I promise).
+
+---
+
+## na.strings
+
+If we look at the help file for `read.csv` (`?read.csv`), we see there's an argument called `na.strings`. We have two things we need to be NA, so we combine them like we did a few slides ago: `c(6999, 7777)`.
+
+```{r}
+soiltempdata <- read.csv("soiltempdata.csv", skip=16, na.strings=c(6999, 7777))
+str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+```
+
+And now it's full of NAs (missing values), as it should be.
