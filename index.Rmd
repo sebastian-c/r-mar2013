@@ -303,3 +303,63 @@ str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
 ```
 
 And now it's full of NAs (missing values), as it should be.
+
+---
+
+## Changing dates
+
+A slight problem (but one which will not force us to have to read the data in again) is that the Date column is a factor (has no real order) rather than a time object (which does have an order). We can remedy this quickly by assigning that column a copy of itself formatted correctly:
+
+```{r}
+str(soiltempdata$Date.Time..AST.)
+soiltempdata$Date.Time..AST. <- strptime(soiltempdata$Date.Time..AST., "%m/%d/%Y %H:%M")
+str(soiltempdata$Date.Time..AST.)
+```
+
+---
+
+## Summaries
+
+Summaries of a dataframe's columns can easily be obtained with `summary`:
+
+```{r}
+summary(soiltempdata)
+```
+
+---
+
+## Plotting
+
+We can now do some basic plotting. Let's look at the 0cm depth over time. This is easy using the `plot` function. We'll use the `type="l"` argument to make it a line plot:
+
+```{r, fig.width=14, fig.height=5}
+plot(soiltempdata$Date.Time..AST., soiltempdata$X0.cm.Depth.Soil.Temperature...., type="l")
+```
+
+---
+
+## Tidy data
+
+At the moment the dataset is usable, but is it [tidy](http://vita.had.co.nz/papers/tidy-data.html)? To be tidy, a dataset must have the following qualities:
+
+1. Each variable forms a column
+2. Each observation forms a row
+3. Each table stores data about one class of experimental unit
+
+This data has multiple columns for temperature variables. It would be easier to deal with if all temperatures were in the same column. Ideally, we would have a column for date, a column for depth and a column for temperature. This is often called converted from 'wide' format (many columns, few rows) to 'long' format (few columns, many rows).
+
+---
+
+## Reshaping data
+
+One of the best ways to rearrange your data is to use the `reshape2` packages. You can use the `library` or the `require` function to load it.
+
+You may get an error:
+
+```{r, echo=2}
+library <- function(reshape2){stop("there is no package called 'reshape2'")}
+library(reshape2)
+rm(library)
+```
+
+If this happens to you, then `reshape2` has not yet been installed. Use `install.packages("reshape2")` to install it and `library(reshape2)` to load it.
