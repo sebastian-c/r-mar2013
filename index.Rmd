@@ -12,6 +12,11 @@ mode        : selfcontained   # {standalone, draft}
 
 ## Welcome to R
 
+```{r setchunkoptions, cache=FALSE, include=FALSE}
+library(knitr)
+opts_chunk$set(fig.width=14, fig.height=5)
+```
+
 Hopefully by now you've started up RStudio (or your IDE or text editor of choice) and are greeted by a command prompt:
 
 ![](images/rconsole.png)
@@ -332,7 +337,7 @@ summary(soiltempdata)
 
 We can now do some basic plotting. Let's look at the 0cm depth over time. This is easy using the `plot` function, given that our data is in order. We'll use the `type="l"` argument to make it a line plot:
 
-```{r, fig.width=14, fig.height=5}
+```{r}
 plot(soiltempdata$Depth.0.cm, type="l")
 ```
 
@@ -375,23 +380,148 @@ If this happens to you, then `reshape2` has not yet been installed. Use `install
 
 ## Reshaping data
 
+Now we have the `reshape2` package loaded in, we can use the `melt` function to melt out dataframe. See the `?melt.data.frame` page for details. The `id.vars` are the variables we don't want to melt. The `.name` arguments control the column names of the result:
+
+```{r}
+library(reshape2)
+soiltemp_melt <- melt(soiltempdata, id.vars=c("Year", "Month", "Day", "Hour"), variable.name="Depth", value.name="Temperature")
+
+head(soiltemp_melt)
+```
+
+---
+
+## Poor depths
+
+See now we have depth in one column and temperature in another. That's not really good enough though. Out Depth column is still not useful. Using the `table` function to get a summary of the values in it:
+
+```{r}
+table(soiltemp_melt$Depth)
+```
+
+There are 6552 of each Depth measurement. But wouldn't it be nice if we had only the depth in cm instead of all the text?
+
 ---
 
 ## Regex
+
+We can use regular expressions to extract the numbers. First, we'll use the `regexpr` function to extract the locations of the numbers:
+
+```{r}
+num_matches <- regexpr("[[:digit:]]+", soiltemp_melt$Depth)
+str(num_matches)
+```
+
+The string `[[:digit:]]+` is a special string. `[[:digit:]]` means any number from 0-9 and the `+` on the end means 1 or more. So find one or more numbers. The results mean that the match starts at the 7th digit ("Depth.**0**") and is only 1 character long. If we were to scroll down to the "Depth.**150**.cm", we'd see that the match also starts at the 7th digit and is 3 characters long.
+
+---
+
+## From Regex to reality
+
+We can use the `regmatches` command to convert from these positions to the actual numbers they match, then assign that back to our Depth column.
+
+```{r}
+depth_nums <- regmatches(soiltemp_melt$Depth, num_matches)
+head(depth_nums)
+```
+Hmm... characters (you can tell by the quotes). We had better convert those to numbers before we replace our depth column).
+
+```{r}
+soiltemp_melt$Depth <- as.numeric(depth_nums)
+```
+
+---&radio .quiz
+
+## Stop and check quiz
+
+### What is the 3rd element of the Depth column now?
+
+1. -6.727
+2. _0_
+3. 1
+4. Depth.0.cm
+
+*** explanation
+It's 0 because we just converted the depths to numbers. If your data seems weird, check with one of us.
 
 ---
 
 ## Plots again
 
-* soil temp by depth scatter plots and boxplots
+Now that we have stacked data, it's much easier to make plots. For example, it's easy to make a simple scatterplot of Temperature vs Depth.
+
+```{r}
+plot(Temperature~Depth, data=soiltemp_melt)
+```
+
+---
+
+## Depth boxplots
+
+We can also make better boxplots:
+
+```{r}
+boxplot(Temperature~Depth, data=soiltemp_melt, xlab="Depth", ylab="Temperature")
+```
 
 ---
 
 ## plyr
 
-* summarise 
-* split by hour
-* split by month
+Stacking out data has also made our data easier to summarise. We're going to use the `plyr` package. In particular, a function called `ddply` Let's start with something simple. Let's get the mean temperature for each Depth:
+
+```{r}
+library(plyr)
+depth_mean <- ddply(soiltemp_melt, c("Depth"), summarise, meandepth=mean(Temperature, na.rm=TRUE))
+depth_mean
+```
+
+---
+
+## Plotting summaries
+
+We can now plot that easily:
+
+```{r}
+plot(meandepth~Depth, data=depth_mean)
+```
+
+---
+
+## More complex summaries
+
+What if we want more? Say we want to know the temperature distribution during the day for each depth?
+
+```{r}
+depthday_dist <- ddply(soiltemp_melt, c("Hour", "Depth"), summarise, meandepthday=mean(Temperature))
+head(depthday_dist, 2)
+```
+
+That summary is long and hard to plot on a simple graph. How can we make a graph that will plot something like that?
+
+---
+
+## ggplot2
+
+`ggplot2` is another package by Hadley Wickham which allows you to build up complex plots from basic elements. First we define the data of the plot in `ggplot`, then define the geoms.
+
+```{r, fig.height=4}
+library(ggplot2)
+ggplot(depthday_dist, aes(x=Hour, y=meandepthday)) +
+  geom_point()
+```
+
+---
+
+## Adding a little bit of colour
+
+But how do we tell the points apart? Maybe we could give them different colours and connect the dots by lines? We'll convert Depth to factor so it isn't treated like a number.
+
+```{r}
+ggplot(depthday_dist, aes(x=Hour, y=meandepthday, colour=as.factor(Depth))) +
+  geom_line() +
+  labs(colour="Depth")
+```
 
 ---
 
