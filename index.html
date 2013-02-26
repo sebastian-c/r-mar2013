@@ -387,16 +387,7 @@ soiltempdata &lt;- read.csv(url)
 <pre><code class="r">head(soiltempdata, 4)
 </code></pre>
 
-<pre><code>##   COL.                         DATA.TYPE X X.1 X.2 X.3 X.4 X.5 X.6 X.7 X.8
-## 1    1                   Date Time (AST)                                  
-## 2    2  0-cm Depth Soil Temperature (°C)                                  
-## 3    3  5-cm Depth Soil Temperature (°C)                                  
-## 4    4 10-cm Depth Soil Temperature (°C)                                  
-##   X.9 X.10
-## 1         
-## 2         
-## 3         
-## 4
+<pre><code>## Error: internal error -3 in R_decompress1
 </code></pre>
 
 <p>Blech. That&#39;s not what we wanted at all. Most of those columns are empty.</p>
@@ -410,7 +401,7 @@ soiltempdata &lt;- read.csv(url)
     <h2>Fixing the data</h2>
   </hgroup>
   <article>
-    <p>What went wrong? Let&#39;s download the data and open it up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click <a href="https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv">here</a> to link to the data (if you&#39;re feeling adventurous, try using the <code>download.file</code> function to download it). Save it to your hard drive (put it into My Documents). Then open the CSV file.</p>
+    <p>What went wrong? Let&#39;s download the data and open it up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click <a href="https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv">here</a> to link to the data (if you&#39;re feeling adventurous, try using the <code>download.file</code> function to download it. Be sure to use the <code>mode=&quot;wb&quot;</code> option). Save it to your hard drive (put it into My Documents). Then open the CSV file.</p>
 
 <p><img src="images/headsoiltempdata.png" height="300px"></p>
 
@@ -496,34 +487,18 @@ soiltempdata &lt;- read.csv(url)
 head(soiltempdata, 3)
 </code></pre>
 
-<pre><code>##   Date.Time..AST. X0.cm.Depth.Soil.Temperature....
-## 1  1/01/2011 0:00                           -6.752
-## 2  1/01/2011 1:00                           -6.727
-## 3  1/01/2011 2:00                           -6.726
-##   X5.cm.Depth.Soil.Temperature.... X10.cm.Depth.Soil.Temperature....
-## 1                           -4.940                            -5.061
-## 2                           -4.916                            -5.098
-## 3                           -4.916                            -5.098
-##   X15.cm.Depth.Soil.Temperature.... X20.cm.Depth.Soil.Temperature....
-## 1                            -4.401                            -3.698
-## 2                            -4.378                            -3.733
-## 3                            -4.377                            -3.733
-##   X40.cm.Depth.Soil.Temperature.... X60.cm.Depth.Soil.Temperature....
-## 1                            -2.014                             0.041
-## 2                            -1.993                             0.010
-## 3                            -1.992                             0.010
-##   X80.cm.Depth.Soil.Temperature.... X100.cm.Depth.Soil.Temperature....
-## 1                            -0.215                               7777
-## 2                            -0.195                               7777
-## 3                            -0.195                               7777
-##   X120.cm.Depth.Soil.Temperature.... X135.cm.Depth.Soil.Temperature....
-## 1                             -0.525                             -0.577
-## 2                             -0.505                             -0.608
-## 3                             -0.504                             -0.608
-##   X150.cm.Depth.Soil.Temperature....
-## 1                             -0.995
-## 2                             -1.028
-## 3                             -1.027
+<pre><code>##   Year Month Day Hour Depth.0.cm Depth.5.cm Depth.10.cm Depth.15.cm
+## 1 2011     1   1    0     -6.752     -4.940      -5.061      -4.401
+## 2 2011     1   1    1     -6.727     -4.916      -5.098      -4.378
+## 3 2011     1   1    2     -6.726     -4.916      -5.098      -4.377
+##   Depth.20.cm Depth.40.cm Depth.60.cm Depth.80.cm Depth.100.cm
+## 1      -3.698      -2.014       0.041      -0.215         7777
+## 2      -3.733      -1.993       0.010      -0.195         7777
+## 3      -3.733      -1.992       0.010      -0.195         7777
+##   Depth.120.cm Depth.135.cm Depth.150.cm
+## 1       -0.525       -0.577       -0.995
+## 2       -0.505       -0.608       -1.028
+## 3       -0.504       -0.608       -1.027
 </code></pre>
 
   </article>
@@ -540,20 +515,23 @@ head(soiltempdata, 3)
 <pre><code class="r">str(soiltempdata)
 </code></pre>
 
-<pre><code>## &#39;data.frame&#39;:    6552 obs. of  13 variables:
-##  $ Date.Time..AST.                   : Factor w/ 6552 levels &quot;1/01/2011 0:00&quot;,..: 1 2 13 18 19 20 21 22 23 24 ...
-##  $ X0.cm.Depth.Soil.Temperature....  : num  -6.75 -6.73 -6.73 -6.65 -6.67 ...
-##  $ X5.cm.Depth.Soil.Temperature....  : num  -4.94 -4.92 -4.92 -4.91 -4.86 ...
-##  $ X10.cm.Depth.Soil.Temperature.... : num  -5.06 -5.1 -5.1 -5.03 -5.04 ...
-##  $ X15.cm.Depth.Soil.Temperature.... : num  -4.4 -4.38 -4.38 -4.37 -4.38 ...
-##  $ X20.cm.Depth.Soil.Temperature.... : num  -3.7 -3.73 -3.73 -3.72 -3.68 ...
-##  $ X40.cm.Depth.Soil.Temperature.... : num  -2.01 -1.99 -1.99 -2.04 -2.05 ...
-##  $ X60.cm.Depth.Soil.Temperature.... : num  0.041 0.01 0.01 0.02 0.004 0.04 0.078 0.071 0.055 0.05 ...
-##  $ X80.cm.Depth.Soil.Temperature.... : num  -0.215 -0.195 -0.195 -0.236 -0.2 -0.165 -0.177 -0.184 -0.201 -0.205 ...
-##  $ X100.cm.Depth.Soil.Temperature....: int  7777 7777 7777 7777 7777 7777 7777 7777 7777 7777 ...
-##  $ X120.cm.Depth.Soil.Temperature....: num  -0.525 -0.505 -0.504 -0.546 -0.51 -0.526 -0.487 -0.494 -0.511 -0.515 ...
-##  $ X135.cm.Depth.Soil.Temperature....: num  -0.577 -0.608 -0.608 -0.598 -0.614 -0.578 -0.591 -0.598 -0.615 -0.619 ...
-##  $ X150.cm.Depth.Soil.Temperature....: num  -0.995 -1.028 -1.027 -1.017 -0.98 ...
+<pre><code>## &#39;data.frame&#39;:    6552 obs. of  16 variables:
+##  $ Year        : int  2011 2011 2011 2011 2011 2011 2011 2011 2011 2011 ...
+##  $ Month       : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ Day         : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ Hour        : int  0 1 2 3 4 5 6 7 8 9 ...
+##  $ Depth.0.cm  : num  -6.75 -6.73 -6.73 -6.65 -6.67 ...
+##  $ Depth.5.cm  : num  -4.94 -4.92 -4.92 -4.91 -4.86 ...
+##  $ Depth.10.cm : num  -5.06 -5.1 -5.1 -5.03 -5.04 ...
+##  $ Depth.15.cm : num  -4.4 -4.38 -4.38 -4.37 -4.38 ...
+##  $ Depth.20.cm : num  -3.7 -3.73 -3.73 -3.72 -3.68 ...
+##  $ Depth.40.cm : num  -2.01 -1.99 -1.99 -2.04 -2.05 ...
+##  $ Depth.60.cm : num  0.041 0.01 0.01 0.02 0.004 0.04 0.078 0.071 0.055 0.05 ...
+##  $ Depth.80.cm : num  -0.215 -0.195 -0.195 -0.236 -0.2 -0.165 -0.177 -0.184 -0.201 -0.205 ...
+##  $ Depth.100.cm: int  7777 7777 7777 7777 7777 7777 7777 7777 7777 7777 ...
+##  $ Depth.120.cm: num  -0.525 -0.505 -0.504 -0.546 -0.51 -0.526 -0.487 -0.494 -0.511 -0.515 ...
+##  $ Depth.135.cm: num  -0.577 -0.608 -0.608 -0.598 -0.614 -0.578 -0.591 -0.598 -0.615 -0.619 ...
+##  $ Depth.150.cm: num  -0.995 -1.028 -1.027 -1.017 -0.98 ...
 </code></pre>
 
   </article>
@@ -567,7 +545,7 @@ head(soiltempdata, 3)
   <article>
     <p>Something still isn&#39;t right. Look at the 100cm depth soil temperature from the previous slide. Note that you can use the <code>$</code> symbol to subset out individual columns.</p>
 
-<pre><code class="r">str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+<pre><code class="r">str(soiltempdata$Depth.100.cm)
 </code></pre>
 
 <pre><code>##  int [1:6552] 7777 7777 7777 7777 7777 7777 7777 7777 7777 7777 ...
@@ -595,7 +573,7 @@ head(soiltempdata, 3)
 
 <pre><code class="r">soiltempdata &lt;- read.csv(&quot;soiltempdata.csv&quot;, skip = 16, na.strings = c(6999, 
     7777))
-str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+str(soiltempdata$Depth.100.cm)
 </code></pre>
 
 <pre><code>##  logi [1:6552] NA NA NA NA NA NA ...
@@ -609,30 +587,6 @@ str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
 
       <slide class="" id="slide-23" style="background:;">
   <hgroup>
-    <h2>Changing dates</h2>
-  </hgroup>
-  <article>
-    <p>A slight problem (but one which will not force us to have to read the data in again) is that the Date column is a factor (has no real order) rather than a time object (which does have an order). We can remedy this quickly by assigning that column a copy of itself formatted correctly:</p>
-
-<pre><code class="r">str(soiltempdata$Date.Time..AST.)
-</code></pre>
-
-<pre><code>##  Factor w/ 6552 levels &quot;1/01/2011 0:00&quot;,..: 1 2 13 18 19 20 21 22 23 24 ...
-</code></pre>
-
-<pre><code class="r">soiltempdata$Date.Time..AST. &lt;- strptime(soiltempdata$Date.Time..AST., &quot;%m/%d/%Y %H:%M&quot;)
-str(soiltempdata$Date.Time..AST.)
-</code></pre>
-
-<pre><code>##  POSIXlt[1:6552], format: &quot;2011-01-01 00:00:00&quot; &quot;2011-01-01 01:00:00&quot; ...
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="" id="slide-24" style="background:;">
-  <hgroup>
     <h2>Summaries</h2>
   </hgroup>
   <article>
@@ -641,56 +595,48 @@ str(soiltempdata$Date.Time..AST.)
 <pre><code class="r">summary(soiltempdata)
 </code></pre>
 
-<pre><code>##  Date.Time..AST.               X0.cm.Depth.Soil.Temperature....
-##  Min.   :2011-01-01 00:00:00   Min.   :-10.87                  
-##  1st Qu.:2011-03-10 05:45:00   1st Qu.: -8.70                  
-##  Median :2011-05-17 11:30:00   Median : -3.79                  
-##  Mean   :2011-05-17 11:09:45   Mean   :  0.44                  
-##  3rd Qu.:2011-07-24 17:15:00   3rd Qu.:  7.33                  
-##  Max.   :2011-09-30 23:00:00   Max.   : 37.21                  
-##  X5.cm.Depth.Soil.Temperature.... X10.cm.Depth.Soil.Temperature....
-##  Min.   :-9.90                    Min.   :-9.88                    
-##  1st Qu.:-8.24                    1st Qu.:-8.32                    
-##  Median :-2.79                    Median :-2.92                    
-##  Mean   : 0.17                    Mean   :-1.07                    
-##  3rd Qu.: 6.32                    3rd Qu.: 4.49                    
-##  Max.   :32.20                    Max.   :22.02                    
-##  X15.cm.Depth.Soil.Temperature.... X20.cm.Depth.Soil.Temperature....
-##  Min.   :-9.52                     Min.   :-9.33                    
-##  1st Qu.:-8.04                     1st Qu.:-7.86                    
-##  Median :-2.58                     Median :-2.28                    
-##  Mean   :-1.51                     Mean   :-1.87                    
-##  3rd Qu.: 3.90                     3rd Qu.: 3.31                    
-##  Max.   :14.76                     Max.   :10.35                    
-##  X40.cm.Depth.Soil.Temperature.... X60.cm.Depth.Soil.Temperature....
-##  Min.   :-8.81                     Min.   :-7.787                   
-##  1st Qu.:-7.51                     1st Qu.:-6.435                   
-##  Median :-1.82                     Median :-1.444                   
-##  Mean   :-2.75                     Mean   :-2.846                   
-##  3rd Qu.: 1.08                     3rd Qu.: 0.199                   
-##  Max.   : 4.03                     Max.   : 1.251                   
-##  X80.cm.Depth.Soil.Temperature.... X100.cm.Depth.Soil.Temperature....
-##  Min.   :-7.473                    Mode:logical                      
-##  1st Qu.:-6.212                    NA&#39;s:6552                         
-##  Median :-2.009                                                      
-##  Mean   :-3.170                                                      
-##  3rd Qu.:-0.449                                                      
-##  Max.   :-0.122                                                      
-##  X120.cm.Depth.Soil.Temperature.... X135.cm.Depth.Soil.Temperature....
-##  Min.   :-6.935                     Min.   :-6.709                    
-##  1st Qu.:-5.713                     1st Qu.:-5.495                    
-##  Median :-2.482                     Median :-2.577                    
-##  Mean   :-3.230                     Mean   :-3.205                    
-##  3rd Qu.:-0.977                     3rd Qu.:-1.096                    
-##  Max.   :-0.487                     Max.   :-0.574                    
-##  X150.cm.Depth.Soil.Temperature....
-##  Min.   :-6.90                     
-##  1st Qu.:-5.69                     
-##  Median :-3.04                     
-##  Mean   :-3.59                     
-##  3rd Qu.:-1.63                     
-##  Max.   :-0.98
+<pre><code>##       Year          Month           Day            Hour      
+##  Min.   :2011   Min.   :1.00   Min.   : 1.0   Min.   : 0.00  
+##  1st Qu.:2011   1st Qu.:3.00   1st Qu.: 8.0   1st Qu.: 5.75  
+##  Median :2011   Median :5.00   Median :16.0   Median :11.50  
+##  Mean   :2011   Mean   :5.02   Mean   :15.7   Mean   :11.50  
+##  3rd Qu.:2011   3rd Qu.:7.00   3rd Qu.:23.0   3rd Qu.:17.25  
+##  Max.   :2011   Max.   :9.00   Max.   :31.0   Max.   :23.00  
+##    Depth.0.cm       Depth.5.cm     Depth.10.cm     Depth.15.cm   
+##  Min.   :-10.87   Min.   :-9.90   Min.   :-9.88   Min.   :-9.52  
+##  1st Qu.: -8.70   1st Qu.:-8.24   1st Qu.:-8.32   1st Qu.:-8.04  
+##  Median : -3.79   Median :-2.79   Median :-2.92   Median :-2.58  
+##  Mean   :  0.44   Mean   : 0.17   Mean   :-1.07   Mean   :-1.51  
+##  3rd Qu.:  7.33   3rd Qu.: 6.32   3rd Qu.: 4.49   3rd Qu.: 3.90  
+##  Max.   : 37.21   Max.   :32.20   Max.   :22.02   Max.   :14.76  
+##   Depth.20.cm     Depth.40.cm     Depth.60.cm      Depth.80.cm    
+##  Min.   :-9.33   Min.   :-8.81   Min.   :-7.787   Min.   :-7.473  
+##  1st Qu.:-7.86   1st Qu.:-7.51   1st Qu.:-6.435   1st Qu.:-6.212  
+##  Median :-2.28   Median :-1.82   Median :-1.444   Median :-2.009  
+##  Mean   :-1.87   Mean   :-2.75   Mean   :-2.846   Mean   :-3.170  
+##  3rd Qu.: 3.31   3rd Qu.: 1.08   3rd Qu.: 0.199   3rd Qu.:-0.449  
+##  Max.   :10.35   Max.   : 4.03   Max.   : 1.251   Max.   :-0.122  
+##  Depth.100.cm    Depth.120.cm     Depth.135.cm     Depth.150.cm  
+##  Mode:logical   Min.   :-6.935   Min.   :-6.709   Min.   :-6.90  
+##  NA&#39;s:6552      1st Qu.:-5.713   1st Qu.:-5.495   1st Qu.:-5.69  
+##                 Median :-2.482   Median :-2.577   Median :-3.04  
+##                 Mean   :-3.230   Mean   :-3.205   Mean   :-3.59  
+##                 3rd Qu.:-0.977   3rd Qu.:-1.096   3rd Qu.:-1.63  
+##                 Max.   :-0.487   Max.   :-0.574   Max.   :-0.98
 </code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-24" style="background:;">
+  <hgroup>
+    <h2>Histogram</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Histogram of depth 0.</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -698,22 +644,50 @@ str(soiltempdata$Date.Time..AST.)
 
       <slide class="" id="slide-25" style="background:;">
   <hgroup>
-    <h2>Plotting</h2>
+    <h2>Boxplots</h2>
   </hgroup>
   <article>
-    <p>We can now do some basic plotting. Let&#39;s look at the 0cm depth over time. This is easy using the <code>plot</code> function. We&#39;ll use the <code>type=&quot;l&quot;</code> argument to make it a line plot:</p>
-
-<pre><code class="r">plot(soiltempdata$Date.Time..AST., soiltempdata$X0.cm.Depth.Soil.Temperature...., 
-    type = &quot;l&quot;)
-</code></pre>
-
-<p><img src="figure/unnamed-chunk-20.png" alt="plot of chunk unnamed-chunk-20"> </p>
+    <ul>
+<li>Soil temp by month</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
       <slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Plotting</h2>
+  </hgroup>
+  <article>
+    <p>We can now do some basic plotting. Let&#39;s look at the 0cm depth over time. This is easy using the <code>plot</code> function, given that our data is in order. We&#39;ll use the <code>type=&quot;l&quot;</code> argument to make it a line plot:</p>
+
+<pre><code class="r">plot(soiltempdata$Depth.0.cm, type = &quot;l&quot;)
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-19.png" alt="plot of chunk unnamed-chunk-19"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Plotting a subset</h2>
+  </hgroup>
+  <article>
+    <p>What if we&#39;re only interested in one month? Say we&#39;re only interested in January (month 1)?</p>
+
+<ul>
+<li>Line plot of January</li>
+<li>Histogram of midday temperatures (hour=12)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>Tidy data</h2>
   </hgroup>
@@ -732,9 +706,9 @@ str(soiltempdata$Date.Time..AST.)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-27" style="background:;">
+      <slide class="" id="slide-29" style="background:;">
   <hgroup>
-    <h2>Reshaping data</h2>
+    <h2>Loading in packages</h2>
   </hgroup>
   <article>
     <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> packages. You can use the <code>library</code> or the <code>require</code> function to load it.</p>
@@ -748,6 +722,130 @@ str(soiltempdata$Date.Time..AST.)
 </code></pre>
 
 <p>If this happens to you, then <code>reshape2</code> has not yet been installed. Use <code>install.packages(&quot;reshape2&quot;)</code> to install it and <code>library(reshape2)</code> to load it.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>Reshaping data</h2>
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>Regex</h2>
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>Plots again</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>soil temp by depth scatter plots and boxplots</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>plyr</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>summarise </li>
+<li>split by hour</li>
+<li>split by month</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>ggplot2</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Produce graph of depths~time</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>correlation</h2>
+  </hgroup>
+  <article>
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>lm</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>temp~depth</li>
+<li>temp~depth+month</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-37" style="background:;">
+  <hgroup>
+    <h2>Fun to look forward to:</h2>
+  </hgroup>
+  <article>
+    <p>When you have a bit more R experience, you can make graphs like the following:</p>
+
+<ul>
+<li>Dates</li>
+<li>RGoogleVis</li>
+<li>This presentation</li>
+<li>Soil graphs (from different data)</li>
+<li>Map with points in R</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-38" style="background:;">
+  <hgroup>
+    <h2>Now your turn</h2>
+  </hgroup>
+  <article>
+    <ul>
+<li>Here is a new data set</li>
+<li>Here is what I want you to do 
+
+<ul>
+<li>This thing</li>
+<li>This thing</li>
+</ul></li>
+<li>Go nuts</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->

@@ -208,7 +208,7 @@ Blech. That's not what we wanted at all. Most of those columns are empty.
 
 ## Fixing the data
 
-What went wrong? Let's download the data and open it up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click [here](https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv) to link to the data (if you're feeling adventurous, try using the `download.file` function to download it). Save it to your hard drive (put it into My Documents). Then open the CSV file.
+What went wrong? Let's download the data and open it up in Excel or Notepad and look at it (ideally, you should do this before trying to read it in). Click [here](https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv) to link to the data (if you're feeling adventurous, try using the `download.file` function to download it. Be sure to use the `mode="wb"` option). Save it to your hard drive (put it into My Documents). Then open the CSV file.
 
 <img src="images/headsoiltempdata.png" height="300px">
 
@@ -281,7 +281,7 @@ str(soiltempdata)
 Something still isn't right. Look at the 100cm depth soil temperature from the previous slide. Note that you can use the `$` symbol to subset out individual columns.
 
 ```{r}
-str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+str(soiltempdata$Depth.100.cm)
 ```
 
 There is no way that there is a soil with a temperature of 7777 degrees celsius. So why is that present? Well, if we reopen the data in Excel or Notepad, we'll see there were two important lines: 
@@ -299,22 +299,10 @@ If we look at the help file for `read.csv` (`?read.csv`), we see there's an argu
 
 ```{r}
 soiltempdata <- read.csv("soiltempdata.csv", skip=16, na.strings=c(6999, 7777))
-str(soiltempdata$X100.cm.Depth.Soil.Temperature....)
+str(soiltempdata$Depth.100.cm)
 ```
 
 And now it's full of NAs (missing values), as it should be.
-
----
-
-## Changing dates
-
-A slight problem (but one which will not force us to have to read the data in again) is that the Date column is a factor (has no real order) rather than a time object (which does have an order). We can remedy this quickly by assigning that column a copy of itself formatted correctly:
-
-```{r}
-str(soiltempdata$Date.Time..AST.)
-soiltempdata$Date.Time..AST. <- strptime(soiltempdata$Date.Time..AST., "%m/%d/%Y %H:%M")
-str(soiltempdata$Date.Time..AST.)
-```
 
 ---
 
@@ -328,13 +316,32 @@ summary(soiltempdata)
 
 ---
 
+## Histogram
+
+* Histogram of depth 0.
+
+---
+
+## Boxplots
+
+* Soil temp by month
+
+---
+
 ## Plotting
 
-We can now do some basic plotting. Let's look at the 0cm depth over time. This is easy using the `plot` function. We'll use the `type="l"` argument to make it a line plot:
+We can now do some basic plotting. Let's look at the 0cm depth over time. This is easy using the `plot` function, given that our data is in order. We'll use the `type="l"` argument to make it a line plot:
 
 ```{r, fig.width=14, fig.height=5}
-plot(soiltempdata$Date.Time..AST., soiltempdata$X0.cm.Depth.Soil.Temperature...., type="l")
+plot(soiltempdata$Depth.0.cm, type="l")
 ```
+
+---
+
+## Plotting a subset
+What if we're only interested in one month? Say we're only interested in January (month 1)?
+* Line plot of January
+* Histogram of midday temperatures (hour=12)
 
 ---
 
@@ -350,7 +357,7 @@ This data has multiple columns for temperature variables. It would be easier to 
 
 ---
 
-## Reshaping data
+## Loading in packages
 
 One of the best ways to rearrange your data is to use the `reshape2` packages. You can use the `library` or the `require` function to load it.
 
@@ -363,3 +370,65 @@ rm(library)
 ```
 
 If this happens to you, then `reshape2` has not yet been installed. Use `install.packages("reshape2")` to install it and `library(reshape2)` to load it.
+
+---
+
+## Reshaping data
+
+---
+
+## Regex
+
+---
+
+## Plots again
+
+* soil temp by depth scatter plots and boxplots
+
+---
+
+## plyr
+
+* summarise 
+* split by hour
+* split by month
+
+---
+
+## ggplot2
+
+* Produce graph of depths~time
+
+---
+
+## correlation
+
+---
+
+## lm
+
+* temp~depth
+* temp~depth+month
+
+---
+
+
+## Fun to look forward to:
+
+When you have a bit more R experience, you can make graphs like the following:
+
+* Dates
+* RGoogleVis
+* This presentation
+* Soil graphs (from different data)
+* Map with points in R
+
+---
+
+## Now your turn
+
+* Here is a new data set
+* Here is what I want you to do 
+ * This thing
+ * This thing
+* Go nuts
