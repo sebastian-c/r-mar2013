@@ -233,8 +233,6 @@ getwd()
 ```
 ```{r, echo=TRUE, eval=FALSE}
 setwd("C:/Users/Sebastian/Documents")
-```
-```{r, echo=TRUE, eval=FALSE}
 getwd()
 ```
 ```
@@ -552,6 +550,19 @@ When you have a bit more R experience, you can make graphs like the following:
 * This presentation
 * Soil graphs (from different data)
 * Map with points in R
+
+---
+
+## googleVis
+
+We can make your first plot a lot fancier if we want:
+
+```{r, results='asis', cache=TRUE, echo=FALSE}
+suppressPackageStartupMessages(library(googleVis))
+soiltempdata <- data.frame(id=1:nrow(soiltempdata), soiltempdata)
+M <- gvisLineChart(soiltempdata, xvar="id", yvar="Depth.0.cm", options=list(width=1000))
+cat(M$html$chart)
+```
 
 ---
 
