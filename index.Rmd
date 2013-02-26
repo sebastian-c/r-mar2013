@@ -560,7 +560,7 @@ We can make your first plot a lot fancier if we want:
 ```{r, results='asis', cache=TRUE, echo=FALSE}
 suppressPackageStartupMessages(library(googleVis))
 soiltempdata <- data.frame(id=1:nrow(soiltempdata), soiltempdata)
-M <- gvisLineChart(soiltempdata, xvar="id", yvar="Depth.0.cm", options=list(width=1000))
+M <- gvisLineChart(soiltempdata, xvar="id", yvar="Depth.0.cm", options=list(width=1000, height=500))
 cat(M$html$chart)
 ```
 
