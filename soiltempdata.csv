@@ -1,20 +1,20 @@
 COL.,DATA TYPE  ,,,,,,,,,,,
 1,Date Time (AST),,,,,,,,,,,
-2,0-cm Depth Soil Temperature (°C),,,,,,,,,,,
-3,5-cm Depth Soil Temperature (°C),,,,,,,,,,,
-4,10-cm Depth Soil Temperature (°C),,,,,,,,,,,
-5,15-cm Depth Soil Temperature (°C),,,,,,,,,,,
-6,20-cm Depth Soil Temperature (°C),,,,,,,,,,,
-7,40-cm Depth Soil Temperature (°C),,,,,,,,,,,
-8,60-cm Depth Soil Temperature (°C),,,,,,,,,,,
-9,80-cm Depth Soil Temperature (°C),,,,,,,,,,,
-10,100-cm Depth Soil Temperature (°C),,,,,,,,,,,
-11,120-cm Depth Soil Temperature (°C),,,,,,,,,,,
-12,135-cm Depth Soil Temperature (°C),,,,,,,,,,,
-13,150-cm Depth Soil Temperature (°C),,,,,,,,,,,
+2,0-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+3,5-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+4,10-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+5,15-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+6,20-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+7,40-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+8,60-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+9,80-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+10,100-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+11,120-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+12,135-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
+13,150-cm Depth Soil Temperature (degrees C),,,,,,,,,,,
 ,"NOTE:,6999 DENOTES MISSING DATA OR INVALID DATA",,,,,,,,,,,
 ,",7777 DENOTES UNCOLLECTED DATA ",,,,,,,,,,,
-Date Time (AST),0-cm Depth Soil Temperature (°),5-cm Depth Soil Temperature (°),10-cm Depth Soil Temperature (°),15-cm Depth Soil Temperature (°),20-cm Depth Soil Temperature (°),40-cm Depth Soil Temperature (°),60-cm Depth Soil Temperature (°),80-cm Depth Soil Temperature (°),100-cm Depth Soil Temperature (°),120-cm Depth Soil Temperature (°),135-cm Depth Soil Temperature (°),150-cm Depth Soil Temperature (°)
+Date Time (AST),Depth 0-cm (degrees C),Depth 5-cm (degrees C),Depth 10-cm (degrees C),Depth 15-cm (degrees C),Depth 20-cm (degrees C),Depth 40-cm (degrees C),Depth 60-cm (degrees C),Depth 80-cm (degrees C),Depth 100-cm (degrees C),Depth 120-cm (degrees C),Depth 135-cm (degrees C),Depth 150-cm (degrees C)
 1/01/2011 0:00,-6.752,-4.94,-5.061,-4.401,-3.698,-2.014,0.041,-0.215,7777,-0.525,-0.577,-0.995
 1/01/2011 1:00,-6.727,-4.916,-5.098,-4.378,-3.733,-1.993,0.01,-0.195,7777,-0.505,-0.608,-1.028
 1/01/2011 2:00,-6.726,-4.916,-5.098,-4.377,-3.733,-1.992,0.01,-0.195,7777,-0.504,-0.608,-1.027
