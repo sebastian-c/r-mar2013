@@ -1,7 +1,7 @@
 ---
 title       : R Tutorial
 subtitle    : March 2013
-author      : José Padarian and Sebastian Campbell
+author      : Sebastian Campbell and José Padarian
 job         : 
 framework   : io2012          # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js    # {highlight.js, prettify, highlight}
@@ -155,6 +155,27 @@ c("SOILID001", 3, 5, "SOILID006", 7)
 Then they all become characters.
 
 If you think about it, you can treat numbers as letters, but it's a lot harder to treat letters as numbers.
+
+---
+
+## Even bigger data
+
+Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we'll use a simple dataset which comes with R: `trees`.
+
+```{r}
+head(trees)
+```
+
+---
+
+## Subsetting
+
+The basic form of a subset is `object[whichrows, whichcolumns]`. Leaving an element blank means select all. So for example, to get the third row of `trees`, or the second column:
+
+```{r}
+trees[3, ]
+trees[ ,2]
+```
 
 ---
 
@@ -333,10 +354,10 @@ summary(soiltempdata)
 
 ## Plotting
 
-We can now do some basic plotting. Let's look at the 0cm depth over time. This is easy using the `plot` function, given that our data is in order. We'll use the `type="l"` argument to make it a line plot:
+We can now do some basic plotting. Let's look at the 0cm depth over time. This is easy using the `plot` function. We need specify the x variable and the y variable. We'll use the `type="l"` argument to make it a line plot (the default has points):
 
 ```{r}
-plot(soiltempdata$Depth.0.cm, type="l")
+plot(soiltempdata$ID, soiltempdata$Depth.0.cm, type="l")
 ```
 
 ---
@@ -382,7 +403,7 @@ Now we have the `reshape2` package loaded in, we can use the `melt` function to 
 
 ```{r}
 library(reshape2)
-soiltemp_melt <- melt(soiltempdata, id.vars=c("Year", "Month", "Day", "Hour"), variable.name="Depth", value.name="Temperature")
+soiltemp_melt <- melt(soiltempdata, id.vars=c("ID", "Year", "Month", "Day", "Hour"), variable.name="Depth", value.name="Temperature")
 
 head(soiltemp_melt)
 ```
@@ -525,7 +546,14 @@ ggplot(depthday_dist, aes(x=Hour, y=meandepthday, colour=as.factor(Depth))) +
 
 ## ggplot2
 
-* Produce graph of depths~time
+We can go back to our original melted data and look at all the depths over time if we facet by Depth.
+
+```{r, fig.height=5}
+ggplot(soiltemp_melt, aes(x=ID, y=Temperature)) +
+  geom_line() +
+  facet_wrap(~ Depth, ncol=3)
+```
+
 
 ---
 
@@ -546,7 +574,7 @@ ggplot(depthday_dist, aes(x=Hour, y=meandepthday, colour=as.factor(Depth))) +
 When you have a bit more R experience, you can make graphs like the following:
 
 * Dates
-* RGoogleVis
+* RGoogleVis (done)
 * This presentation
 * Soil graphs (from different data)
 * Map with points in R
@@ -559,9 +587,16 @@ We can make your first plot a lot fancier if we want:
 
 ```{r, results='asis', cache=TRUE, echo=FALSE}
 suppressPackageStartupMessages(library(googleVis))
-soiltempdata <- data.frame(id=1:nrow(soiltempdata), soiltempdata)
-M <- gvisLineChart(soiltempdata, xvar="id", yvar="Depth.0.cm", options=list(width=1000, height=500))
-cat(M$html$chart)
+
+#soiltempdata <- transform(soiltempdata, Time=paste0(Year, "-", Month, "-", Day, " ", sprintf("%02i", Hour), ":00:00"))
+gvistempdata <- transform(soiltempdata, Time=strptime(paste0(Year, "-", Month, "-", Day, " ", sprintf("%02i", Hour), ":00:00"), tz="America/Anchorage", format="%Y-%m-%d %H:%M:%S"))
+# gvistempdata <- transform(soiltempdata, Time=paste0(sprintf("%02i", Hour), ":00 ", month.name[Month], " ", sprintf("%02i", Day, ", ", "Year")))
+
+names(gvistempdata)[grep("Depth.0.cm", names(gvistempdata), fixed=TRUE)] <- "Temperature"
+
+M <- gvisLineChart(gvistempdata, xvar="Time", yvar="Temperature", options=list(width=1000, height=500, lineWidth=0.5, vAxis="{title:'Temperature'}", hAxis="{title:'Time'}", legend="none", title="Alaskan surface soil temperature"))
+
+print(M, "chart")
 ```
 
 ---
