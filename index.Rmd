@@ -14,7 +14,9 @@ mode        : selfcontained   # {standalone, draft}
 
 ```{r setchunkoptions, cache=FALSE, include=FALSE}
 library(knitr)
+library(knitcitations)
 opts_chunk$set(fig.width=14, fig.height=5)
+bib <- read.bibtex("r-mar2013.bib")
 ```
 
 Hopefully by now you've started up RStudio (or your IDE or text editor of choice) and are greeted by a command prompt:
@@ -449,7 +451,7 @@ hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
 
 ## Tidy data
 
-At the moment the dataset is usable, but is it [tidy](http://vita.had.co.nz/papers/tidy-data.html)? To be tidy, a dataset must have the following qualities:
+At the moment the dataset is usable, but is it tidy `r citep(bib["Wickham2011"])`? To be tidy, a dataset must have the following qualities:
 
 1. Each variable forms a column
 2. Each observation forms a row
@@ -461,14 +463,15 @@ This data has multiple columns for temperature variables. It would be easier to 
 
 ## Loading in packages
 
-One of the best ways to rearrange your data is to use the `reshape2` packages. You can use the `library` or the `require` function to load it.
+One of the best ways to rearrange your data is to use the `reshape2` package `r citep(bib["Wickham2007"])`. You can use the `library` or the `require` function to load it.
 
 You may get an error:
 
-```{r, echo=2}
-library <- function(reshape2){stop("there is no package called 'reshape2'")}
+```{r, eval=FALSE}
 library(reshape2)
-rm(library)
+```
+```
+## Error: there is no package called 'reshape2'
 ```
 
 If this happens to you, then `reshape2` has not yet been installed. Use `install.packages("reshape2")` to install it and `library(reshape2)` to load it.
@@ -600,7 +603,7 @@ That summary is long and hard to plot on a simple graph. How can we make a graph
 
 ## ggplot2
 
-`ggplot2` is another package by Hadley Wickham which allows you to build up complex plots from basic elements. First we define the data of the plot in `ggplot`, then define the geoms.
+`ggplot2` is a package which allows you to build up complex plots from basic elements `r citep(bib["Wickham2009"])`. First we define the data of the plot in `ggplot`, then define the geoms.
 
 ```{r, fig.height=4}
 library(ggplot2)
@@ -639,7 +642,7 @@ ggplot(soiltemp_melt, aes(x=ID, y=Temperature)) +
 
 If we want to check the relation between, for example, the temperature at depth 0 and depth 5, we can use the function `lm`
 
-```{r,echo=FALSE}
+```{r}
 temp0 <- soiltemp_melt$Temperature[soiltemp_melt$Depth == 0]
 temp5 <- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
 ```
@@ -647,9 +650,14 @@ temp5 <- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
 ```{r}
 linear_model <- lm(temp0~temp5) ## temp0 and temp5 stored as subsets
 ```
-We can access some important information using `$`:
+
+---
+
+## Getting things out of a linear model
+
+We can access some important information using `summary`:
 ```{r}
-linear_model$coefficients
+summary(linear_model)
 ```
 Or using `$` in combination with `summary`:
 ```{r}
@@ -679,7 +687,6 @@ When you have a bit more R experience, you can make graphs like the following:
 * This presentation
 * Soil graphs (from different data)
 * Map with points in R
-![](images/rconsole.png)
 
 ---
 
@@ -724,3 +731,11 @@ Plot soil profiles locations:
  * This thing
  * This thing
 * Go nuts
+
+---
+
+## Bibliography
+
+```{r bibliography, echo=FALSE, results='asis'}
+bibliography("html")
+```

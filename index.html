@@ -899,7 +899,7 @@ str(soiltempdata$Depth.100.cm)
     <h2>Tidy data</h2>
   </hgroup>
   <article>
-    <p>At the moment the dataset is usable, but is it <a href="http://vita.had.co.nz/papers/tidy-data.html">tidy</a>? To be tidy, a dataset must have the following qualities:</p>
+    <p>At the moment the dataset is usable, but is it tidy (<a href="http://vita.had.co.nz/papers/tidy-data.html">Wickham, 2011</a>)? To be tidy, a dataset must have the following qualities:</p>
 
 <ol>
 <li>Each variable forms a column</li>
@@ -918,7 +918,7 @@ str(soiltempdata$Depth.100.cm)
     <h2>Loading in packages</h2>
   </hgroup>
   <article>
-    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> packages. You can use the <code>library</code> or the <code>require</code> function to load it.</p>
+    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> package (<a href="http://www.jstatsoft.org/v21/i12/">Wickham, 2007</a>). You can use the <code>library</code> or the <code>require</code> function to load it.</p>
 
 <p>You may get an error:</p>
 
@@ -1174,7 +1174,7 @@ head(depthday_dist, 2)
     <h2>ggplot2</h2>
   </hgroup>
   <article>
-    <p><code>ggplot2</code> is another package by Hadley Wickham which allows you to build up complex plots from basic elements. First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
+    <p><code>ggplot2</code> is a package which allows you to build up complex plots from basic elements (<a href="http://had.co.nz/ggplot2/book">Wickham, 2009</a>). First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
 
 <pre><code class="r">library(ggplot2)
 ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
@@ -1230,16 +1230,45 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
   <article>
     <p>If we want to check the relation between, for example, the temperature at depth 0 and depth 5, we can use the function <code>lm</code></p>
 
+<pre><code class="r">temp0 &lt;- soiltemp_melt$Temperature[soiltemp_melt$Depth == 0]
+temp5 &lt;- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
+</code></pre>
+
 <pre><code class="r">linear_model &lt;- lm(temp0 ~ temp5)  ## temp0 and temp5 stored as subsets
 </code></pre>
 
-<p>We can access some important information using <code>$</code>:</p>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
 
-<pre><code class="r">linear_model$coefficients
+      <slide class="" id="slide-51" style="background:;">
+  <hgroup>
+    <h2>Getting things out of a linear model</h2>
+  </hgroup>
+  <article>
+    <p>We can access some important information using <code>summary</code>:</p>
+
+<pre><code class="r">summary(linear_model)
 </code></pre>
 
-<pre><code>## (Intercept)       temp5 
-##      0.2458      1.1276
+<pre><code>## 
+## Call:
+## lm(formula = temp0 ~ temp5)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -2.764 -0.869  0.085  0.410  6.490 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  0.24580    0.01453    16.9   &lt;2e-16 ***
+## temp5        1.12760    0.00153   739.0   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1 
+## 
+## Residual standard error: 1.18 on 6550 degrees of freedom
+## Multiple R-squared: 0.988,   Adjusted R-squared: 0.988 
+## F-statistic: 5.46e+05 on 1 and 6550 DF,  p-value: &lt;2e-16
 </code></pre>
 
 <p>Or using <code>$</code> in combination with <code>summary</code>:</p>
@@ -1254,7 +1283,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-51" style="background:;">
+      <slide class="" id="slide-52" style="background:;">
   <hgroup>
     <h2>Linear models: Plot</h2>
   </hgroup>
@@ -1271,7 +1300,7 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-52" style="background:;">
+      <slide class="" id="slide-53" style="background:;">
   <hgroup>
     <h2>Fun to look forward to:</h2>
   </hgroup>
@@ -1283,15 +1312,14 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 <li>RGoogleVis (done)</li>
 <li>This presentation</li>
 <li>Soil graphs (from different data)</li>
-<li>Map with points in R
-<img src="images/rconsole.png" alt=""></li>
+<li>Map with points in R</li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-53" style="background:;">
+      <slide class="" id="slide-54" style="background:;">
   <hgroup>
     <h2>googleVis</h2>
   </hgroup>
@@ -27594,7 +27622,7 @@ function displayChartLineChartID19602cac542d() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-54" style="background:;">
+      <slide class="" id="slide-55" style="background:;">
   <hgroup>
     <h2>Soil profiles</h2>
   </hgroup>
@@ -27607,7 +27635,7 @@ function displayChartLineChartID19602cac542d() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-55" style="background:;">
+      <slide class="" id="slide-56" style="background:;">
   <hgroup>
     <h2>Georeferenced data</h2>
   </hgroup>
@@ -27620,7 +27648,7 @@ function displayChartLineChartID19602cac542d() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-56" style="background:;">
+      <slide class="" id="slide-57" style="background:;">
   <hgroup>
     <h2>Now your turn</h2>
   </hgroup>
@@ -27635,6 +27663,30 @@ function displayChartLineChartID19602cac542d() {
 </ul></li>
 <li>Go nuts</li>
 </ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-58" style="background:;">
+  <hgroup>
+    <h2>Bibliography</h2>
+  </hgroup>
+  <article>
+    <p><p>Wickham H (2007).
+&ldquo;Reshaping Data with the reshape Package.&rdquo;
+<EM>Journal of Statistical Software</EM>, <B>21</B>(12), pp. 1&ndash;20.
+<a href="http://www.jstatsoft.org/v21/i12/"><a href="http://www.jstatsoft.org/v21/i12/">http://www.jstatsoft.org/v21/i12/</a></a>.</p>
+
+<p><p>Wickham H (2009).
+<EM>ggplot2: elegant graphics for data analysis</EM>.
+Springer New York.
+ISBN 978-0-387-98140-6, <a href="http://had.co.nz/ggplot2/book"><a href="http://had.co.nz/ggplot2/book">http://had.co.nz/ggplot2/book</a></a>.</p>
+
+<p><p>Wickham H (2011).
+&ldquo;Tidy data.&rdquo;
+<EM>The American Statistician</EM>.
+<a href="http://vita.had.co.nz/papers/tidy-data.html"><a href="http://vita.had.co.nz/papers/tidy-data.html">http://vita.had.co.nz/papers/tidy-data.html</a></a>.</p>
 
   </article>
   <!-- Presenter Notes -->
