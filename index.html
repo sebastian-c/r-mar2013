@@ -833,9 +833,14 @@ str(soiltempdata$Depth.100.cm)
     <h2>Histogram</h2>
   </hgroup>
   <article>
-    <ul>
-<li>Histogram of depth 0.</li>
-</ul>
+    <p>A simple exploratory analysis could start, for example, with and histogram of the data to observe the distribution of the data. Try using the function <code>hist</code> with the temperatures at depth 0:</p>
+
+<pre><code class="r">hist(soiltempdata$Depth.0.cm)
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-25.png" alt="plot of chunk unnamed-chunk-25"> </p>
+
+<p>(Pretty skewed, uh!)</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -846,9 +851,12 @@ str(soiltempdata$Depth.100.cm)
     <h2>Boxplots</h2>
   </hgroup>
   <article>
-    <ul>
-<li>Soil temp by month</li>
-</ul>
+    <p>Other simple and useful plot is the boxplot. Using again the soil temperature at depth 0 and the function <code>boxplot</code>:</p>
+
+<pre><code class="r">boxplot(Depth.0.cm ~ Month, data = soiltempdata, xlab = &quot;Month&quot;, ylab = &quot;Temperature&quot;)
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-26.png" alt="plot of chunk unnamed-chunk-26"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -864,7 +872,7 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">plot(soiltempdata$ID, soiltempdata$Depth.0.cm, type = &quot;l&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-24.png" alt="plot of chunk unnamed-chunk-24"> </p>
+<p><img src="figure/unnamed-chunk-27.png" alt="plot of chunk unnamed-chunk-27"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -875,12 +883,12 @@ str(soiltempdata$Depth.100.cm)
     <h2>Plotting a subset</h2>
   </hgroup>
   <article>
-    <p>What if we&#39;re only interested in one month? Say we&#39;re only interested in January (month 1)?</p>
+    <p>What if we have a special interest in temperature midday temperatures? Let&#39;s create a histogram of midday temperatures at depth 0:</p>
 
-<ul>
-<li>Line plot of January</li>
-<li>Histogram of midday temperatures (hour=12)</li>
-</ul>
+<pre><code class="r">hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-28.png" alt="plot of chunk unnamed-chunk-28"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1069,7 +1077,7 @@ head(depth_nums)
 <pre><code class="r">plot(Temperature ~ Depth, data = soiltemp_melt)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-31.png" alt="plot of chunk unnamed-chunk-31"> </p>
+<p><img src="figure/unnamed-chunk-35.png" alt="plot of chunk unnamed-chunk-35"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1085,7 +1093,7 @@ head(depth_nums)
 <pre><code class="r">boxplot(Temperature ~ Depth, data = soiltemp_melt, xlab = &quot;Depth&quot;, ylab = &quot;Temperature&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-32.png" alt="plot of chunk unnamed-chunk-32"> </p>
+<p><img src="figure/unnamed-chunk-36.png" alt="plot of chunk unnamed-chunk-36"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1133,7 +1141,7 @@ depth_mean
 <pre><code class="r">plot(meandepth ~ Depth, data = depth_mean)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-34.png" alt="plot of chunk unnamed-chunk-34"> </p>
+<p><img src="figure/unnamed-chunk-38.png" alt="plot of chunk unnamed-chunk-38"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1175,7 +1183,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
 <pre><code>## Warning: Removed 24 rows containing missing values (geom_point).
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-36.png" alt="plot of chunk unnamed-chunk-36"> </p>
+<p><img src="figure/unnamed-chunk-40.png" alt="plot of chunk unnamed-chunk-40"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1192,7 +1200,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
     geom_line() + labs(colour = &quot;Depth&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-37.png" alt="plot of chunk unnamed-chunk-37"> </p>
+<p><img src="figure/unnamed-chunk-41.png" alt="plot of chunk unnamed-chunk-41"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1209,7 +1217,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
     ncol = 3)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-38.png" alt="plot of chunk unnamed-chunk-38"> </p>
+<p><img src="figure/unnamed-chunk-42.png" alt="plot of chunk unnamed-chunk-42"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1217,23 +1225,47 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
 
       <slide class="" id="slide-50" style="background:;">
   <hgroup>
-    <h2>correlation</h2>
+    <h2>Linear models</h2>
   </hgroup>
   <article>
-    
+    <p>If we want to check the relation between, for example, the temperature at depth 0 and depth 5, we can use the function <code>lm</code></p>
+
+<pre><code class="r">linear_model &lt;- lm(temp0 ~ temp5)  ## temp0 and temp5 stored as subsets
+</code></pre>
+
+<p>We can access some important information using <code>$</code>:</p>
+
+<pre><code class="r">linear_model$coefficients
+</code></pre>
+
+<pre><code>## (Intercept)       temp5 
+##      0.2458      1.1276
+</code></pre>
+
+<p>Or using <code>$</code> in combination with <code>summary</code>:</p>
+
+<pre><code class="r">summary(linear_model)$r.squared
+</code></pre>
+
+<pre><code>## [1] 0.9881
+</code></pre>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
 
       <slide class="" id="slide-51" style="background:;">
   <hgroup>
-    <h2>lm</h2>
+    <h2>Linear models: Plot</h2>
   </hgroup>
   <article>
-    <ul>
-<li>temp~depth</li>
-<li>temp~depth+month</li>
-</ul>
+    <p>Let&#39;s plot the previous data and fitted linear model:</p>
+
+<pre><code class="r">plot(temp0, temp5)
+abline(linear_model, col = &quot;blue&quot;, lwd = 2)
+</code></pre>
+
+<p><img src="figure/unnamed-chunk-47.png" alt="plot of chunk unnamed-chunk-47"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1251,7 +1283,8 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
 <li>RGoogleVis (done)</li>
 <li>This presentation</li>
 <li>Soil graphs (from different data)</li>
-<li>Map with points in R</li>
+<li>Map with points in R
+<img src="images/rconsole.png" alt=""></li>
 </ul>
 
   </article>
@@ -1267,14 +1300,14 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
 
 <!-- LineChart generated in R 2.15.2 by googleVis 0.4.1 package -->
 
-<!-- Fri Mar 01 17:14:56 2013 -->
+<!-- Mon Mar 04 14:00:43 2013 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataLineChartID16e851775774 () {
+function gvisDataLineChartID19602cac542d () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -27494,8 +27527,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartLineChartID16e851775774() {
-  var data = gvisDataLineChartID16e851775774();
+function drawChartLineChartID19602cac542d() {
+  var data = gvisDataLineChartID19602cac542d();
   var options = {};
 options["allowHtml"] = true;
 options["width"] =   1000;
@@ -27507,7 +27540,7 @@ options["legend"] = "none";
 options["title"] = "Alaskan surface soil temperature";
 
      var chart = new google.visualization.LineChart(
-       document.getElementById('LineChartID16e851775774')
+       document.getElementById('LineChartID19602cac542d')
      );
      chart.draw(data,options);
     
@@ -27516,7 +27549,7 @@ options["title"] = "Alaskan surface soil temperature";
   
  
 // jsDisplayChart
-function displayChartLineChartID16e851775774() {
+function displayChartLineChartID19602cac542d() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   var chartid = "corechart";
@@ -27531,7 +27564,7 @@ function displayChartLineChartID16e851775774() {
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartLineChartID16e851775774);
+  callbacks.push(drawChartLineChartID19602cac542d);
 
   window.clearTimeout(window.__gvisLoad);
   window.__gvisLoad = setTimeout(function() {
@@ -27548,12 +27581,12 @@ function displayChartLineChartID16e851775774() {
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID16e851775774"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID19602cac542d"></script>
  
 
 <!-- divChart -->
 
-<div id="LineChartID16e851775774"
+<div id="LineChartID19602cac542d"
   style="width: 1000px; height: 500px;">
 </div>
 
@@ -27562,6 +27595,32 @@ function displayChartLineChartID16e851775774() {
 </slide>
 
       <slide class="" id="slide-54" style="background:;">
+  <hgroup>
+    <h2>Soil profiles</h2>
+  </hgroup>
+  <article>
+    <p>Plot soil profiles with the help of package <code>aqp</code>:</p>
+
+<p><img src="images/profiles.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-55" style="background:;">
+  <hgroup>
+    <h2>Georeferenced data</h2>
+  </hgroup>
+  <article>
+    <p>Plot soil profiles locations:</p>
+
+<p><img src="images/map.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-56" style="background:;">
   <hgroup>
     <h2>Now your turn</h2>
   </hgroup>
