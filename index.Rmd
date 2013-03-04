@@ -165,7 +165,7 @@ If you think about it, you can treat numbers as letters, but it's a lot harder t
 Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we'll use a simple dataset which comes with R: `trees`. It is a data frame, a collection of vectors as columns. The vectors are allowed to be different types (character, integer, numeric).
 
 ```{r}
-head(trees)
+trees
 ```
 
 ---
@@ -194,10 +194,10 @@ trees[1, 1]
 
 ## The last elements
 
-And we can also use `ncol` and `nrow` to get the last elements:
+And we can also use `nrow` and `ncol` (gets the number of rows or columns) to get the last elements:
 
 ```{r}
-ncol(trees)
+nrow(trees)
 trees[nrow(trees), ]
 trees[, ncol(trees)]
 ```
@@ -212,18 +212,10 @@ You can also subset collections of elements. To get the fourth to seventh row of
 trees[4:7, c(1, 3)]
 ```
 
----
-
-## Other ways of extracting columns
-
-Data frames are collections of vectors, so you can use their names to extract them. You can use your original notation and also `$` notation (which is convenient, but not as powerful).
-
-```{r}
-trees[, "Height"]
-trees$Height
-```
 
 ---&radio .quiz
+
+## Subsetting quiz
 
 ### What is the number in the third last row of the 2nd column of `trees`?
 
@@ -235,6 +227,44 @@ trees$Height
 ***explanation
 
 Using the line `trees[nrow(trees) - 2, 2]` will get you the third last row of the second column. Third last is the last one minus 2 places.
+
+---
+
+## Other ways of extracting columns
+
+Data frames are collections of vectors, so you can use their names to extract them. You can use your original notation and also `$` notation (which is convenient, but not as powerful).
+
+```{r}
+trees[, "Height"]
+trees$Height
+```
+
+---
+
+## Subsetting by a conditional
+
+Often, we want all the rows that meet a certain condition. Say I want all the trees where the height is greater than 82 ft. First, I can produce a TRUE/FALSE variable, then take only the cases where it is true:
+
+```{r}
+greater82 <- trees$Height  > 82
+greater82[1:5]
+trees[greater82, ]
+```
+
+---&radio .quiz
+
+## Logical subsetting quiz
+
+### How many trees are there with a girth less than 12.5 inches?
+
+1. 3
+2. 8
+3. 0
+4. _15_
+
+***explanation
+
+Using the code `trees[trees$Girth < 12.5, ]`, we can see that there are `r nrow(trees[trees$Girth < 12.5, ])` trees with a girth less than 12.5
 
 ---
 
@@ -671,7 +701,7 @@ summary(linear_model)$r.squared
 Let's plot the previous data and fitted linear model:
 
 ```{r}
-plot(temp0,temp5)
+plot(temp5, temp0)
 abline(linear_model,col='blue',lwd=2)
 ```
 
@@ -727,10 +757,11 @@ Plot soil profiles locations:
 ## Now your turn
 
 * Here is a new data set
-* Here is what I want you to do 
- * This thing
- * This thing
-* Go nuts
+ * It is NRCS data of soil around Indonesia
+* Things to try:
+ * Read in the data
+ * Make some basic graphs
+ * Do some basic regression
 
 ---
 

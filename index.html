@@ -310,16 +310,41 @@ bulk_density
   <article>
     <p>Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we&#39;ll use a simple dataset which comes with R: <code>trees</code>. It is a data frame, a collection of vectors as columns. The vectors are allowed to be different types (character, integer, numeric).</p>
 
-<pre><code class="r">head(trees)
+<pre><code class="r">trees
 </code></pre>
 
-<pre><code>##   Girth Height Volume
-## 1   8.3     70   10.3
-## 2   8.6     65   10.3
-## 3   8.8     63   10.2
-## 4  10.5     72   16.4
-## 5  10.7     81   18.8
-## 6  10.8     83   19.7
+<pre><code>##    Girth Height Volume
+## 1    8.3     70   10.3
+## 2    8.6     65   10.3
+## 3    8.8     63   10.2
+## 4   10.5     72   16.4
+## 5   10.7     81   18.8
+## 6   10.8     83   19.7
+## 7   11.0     66   15.6
+## 8   11.0     75   18.2
+## 9   11.1     80   22.6
+## 10  11.2     75   19.9
+## 11  11.3     79   24.2
+## 12  11.4     76   21.0
+## 13  11.4     76   21.4
+## 14  11.7     69   21.3
+## 15  12.0     75   19.1
+## 16  12.9     74   22.2
+## 17  12.9     85   33.8
+## 18  13.3     86   27.4
+## 19  13.7     71   25.7
+## 20  13.8     64   24.9
+## 21  14.0     78   34.5
+## 22  14.2     80   31.7
+## 23  14.5     74   36.3
+## 24  16.0     72   38.3
+## 25  16.3     77   42.6
+## 26  17.3     81   55.4
+## 27  17.5     82   55.7
+## 28  17.9     80   58.3
+## 29  18.0     80   51.5
+## 30  18.0     80   51.0
+## 31  20.6     87   77.0
 </code></pre>
 
   </article>
@@ -379,12 +404,12 @@ bulk_density
     <h2>The last elements</h2>
   </hgroup>
   <article>
-    <p>And we can also use <code>ncol</code> and <code>nrow</code> to get the last elements:</p>
+    <p>And we can also use <code>nrow</code> and <code>ncol</code> (gets the number of rows or columns) to get the last elements:</p>
 
-<pre><code class="r">ncol(trees)
+<pre><code class="r">nrow(trees)
 </code></pre>
 
-<pre><code>## [1] 3
+<pre><code>## [1] 31
 </code></pre>
 
 <pre><code class="r">trees[nrow(trees), ]
@@ -427,39 +452,16 @@ bulk_density
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-17" style="background:;">
+      <slide class="quiz" id="slide-17" style="background:;">
   <hgroup>
-    <h2>Other ways of extracting columns</h2>
-  </hgroup>
-  <article>
-    <p>Data frames are collections of vectors, so you can use their names to extract them. You can use your original notation and also <code>$</code> notation (which is convenient, but not as powerful).</p>
-
-<pre><code class="r">trees[, &quot;Height&quot;]
-</code></pre>
-
-<pre><code>##  [1] 70 65 63 72 81 83 66 75 80 75 79 76 76 69 75 74 85 86 71 64 78 80 74
-## [24] 72 77 81 82 80 80 80 87
-</code></pre>
-
-<pre><code class="r">trees$Height
-</code></pre>
-
-<pre><code>##  [1] 70 65 63 72 81 83 66 75 80 75 79 76 76 69 75 74 85 86 71 64 78 80 74
-## [24] 72 77 81 82 80 80 80 87
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-      <slide class="quiz" id="slide-18" style="background:;">
-  <hgroup>
-    <h3>What is the number in the third last row of the 2nd column of <code>trees</code>?</h3>
+    <h2>Subsetting quiz</h2>
   </hgroup>
   <article>
     
 <div class="quiz-single well new">
-  <ol>
+  <h3>What is the number in the third last row of the 2nd column of <code>trees</code>?</h3>
+
+<ol>
 <li><em>80</em></li>
 <li>87</li>
 <li>65</li>
@@ -487,7 +489,97 @@ bulk_density
   <!-- Presenter Notes -->
 </slide>
 
+      <slide class="" id="slide-18" style="background:;">
+  <hgroup>
+    <h2>Other ways of extracting columns</h2>
+  </hgroup>
+  <article>
+    <p>Data frames are collections of vectors, so you can use their names to extract them. You can use your original notation and also <code>$</code> notation (which is convenient, but not as powerful).</p>
+
+<pre><code class="r">trees[, &quot;Height&quot;]
+</code></pre>
+
+<pre><code>##  [1] 70 65 63 72 81 83 66 75 80 75 79 76 76 69 75 74 85 86 71 64 78 80 74
+## [24] 72 77 81 82 80 80 80 87
+</code></pre>
+
+<pre><code class="r">trees$Height
+</code></pre>
+
+<pre><code>##  [1] 70 65 63 72 81 83 66 75 80 75 79 76 76 69 75 74 85 86 71 64 78 80 74
+## [24] 72 77 81 82 80 80 80 87
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
       <slide class="" id="slide-19" style="background:;">
+  <hgroup>
+    <h2>Subsetting by a conditional</h2>
+  </hgroup>
+  <article>
+    <p>Often, we want all the rows that meet a certain condition. Say I want all the trees where the height is greater than 82 ft. First, I can produce a TRUE/FALSE variable, then take only the cases where it is true:</p>
+
+<pre><code class="r">greater82 &lt;- trees$Height &gt; 82
+greater82[1:5]
+</code></pre>
+
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE
+</code></pre>
+
+<pre><code class="r">trees[greater82, ]
+</code></pre>
+
+<pre><code>##    Girth Height Volume
+## 6   10.8     83   19.7
+## 17  12.9     85   33.8
+## 18  13.3     86   27.4
+## 31  20.6     87   77.0
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="quiz" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Logical subsetting quiz</h2>
+  </hgroup>
+  <article>
+    
+<div class="quiz-single well new">
+  <h3>How many trees are there with a girth less than 12.5 inches?</h3>
+
+<ol>
+<li>3</li>
+<li>8</li>
+<li>0</li>
+<li><em>15</em></li>
+</ol>
+
+
+  
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear">Clear</button>
+  
+  
+  <div class="quiz-hint">
+    
+  </div>
+  
+  <div class="quiz-explanation">
+    <p>Using the code <code>trees[trees$Girth &lt; 12.5, ]</code>, we can see that there are 15 trees with a girth less than 12.5</p>
+
+  </div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Getting help</h2>
   </hgroup>
@@ -507,7 +599,7 @@ bulk_density
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="quiz" id="slide-20" style="background:;">
+      <slide class="quiz" id="slide-22" style="background:;">
   <hgroup>
     <h2>Getting help quiz</h2>
   </hgroup>
@@ -544,7 +636,7 @@ bulk_density
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-21" style="background:;">
+      <slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Dataframes</h2>
   </hgroup>
@@ -561,7 +653,7 @@ soiltempdata &lt;- read.csv(url)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-22" style="background:;">
+      <slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Checking your data</h2>
   </hgroup>
@@ -589,7 +681,7 @@ soiltempdata &lt;- read.csv(url)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-23" style="background:;">
+      <slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Fixing the data</h2>
   </hgroup>
@@ -604,7 +696,7 @@ soiltempdata &lt;- read.csv(url)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-24" style="background:;">
+      <slide class="" id="slide-26" style="background:;">
   <hgroup>
     <h2>Getting to work</h2>
   </hgroup>
@@ -628,7 +720,7 @@ getwd()
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="quiz" id="slide-25" style="background:;">
+      <slide class="quiz" id="slide-27" style="background:;">
   <hgroup>
     <h2>Skipping the first few lines</h2>
   </hgroup>
@@ -667,7 +759,7 @@ getwd()
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-26" style="background:;">
+      <slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>Reading in the data</h2>
   </hgroup>
@@ -696,7 +788,7 @@ head(soiltempdata, 3)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-27" style="background:;">
+      <slide class="" id="slide-29" style="background:;">
   <hgroup>
     <h2>Structure of objects</h2>
   </hgroup>
@@ -730,7 +822,7 @@ head(soiltempdata, 3)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-28" style="background:;">
+      <slide class="" id="slide-30" style="background:;">
   <hgroup>
     <h2>Yet another problem</h2>
   </hgroup>
@@ -756,7 +848,7 @@ head(soiltempdata, 3)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-29" style="background:;">
+      <slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>na.strings</h2>
   </hgroup>
@@ -777,7 +869,7 @@ str(soiltempdata$Depth.100.cm)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-30" style="background:;">
+      <slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>Summaries</h2>
   </hgroup>
@@ -828,7 +920,7 @@ str(soiltempdata$Depth.100.cm)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-31" style="background:;">
+      <slide class="" id="slide-33" style="background:;">
   <hgroup>
     <h2>Histogram</h2>
   </hgroup>
@@ -838,7 +930,7 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">hist(soiltempdata$Depth.0.cm)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-25.png" alt="plot of chunk unnamed-chunk-25"> </p>
+<p><img src="figure/unnamed-chunk-26.png" alt="plot of chunk unnamed-chunk-26"> </p>
 
 <p>(Pretty skewed, uh!)</p>
 
@@ -846,7 +938,7 @@ str(soiltempdata$Depth.100.cm)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-32" style="background:;">
+      <slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>Boxplots</h2>
   </hgroup>
@@ -856,13 +948,13 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">boxplot(Depth.0.cm ~ Month, data = soiltempdata, xlab = &quot;Month&quot;, ylab = &quot;Temperature&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-26.png" alt="plot of chunk unnamed-chunk-26"> </p>
+<p><img src="figure/unnamed-chunk-27.png" alt="plot of chunk unnamed-chunk-27"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-33" style="background:;">
+      <slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>Plotting</h2>
   </hgroup>
@@ -872,13 +964,13 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">plot(soiltempdata$ID, soiltempdata$Depth.0.cm, type = &quot;l&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-27.png" alt="plot of chunk unnamed-chunk-27"> </p>
+<p><img src="figure/unnamed-chunk-28.png" alt="plot of chunk unnamed-chunk-28"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-34" style="background:;">
+      <slide class="" id="slide-36" style="background:;">
   <hgroup>
     <h2>Plotting a subset</h2>
   </hgroup>
@@ -888,13 +980,13 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-28.png" alt="plot of chunk unnamed-chunk-28"> </p>
+<p><img src="figure/unnamed-chunk-29.png" alt="plot of chunk unnamed-chunk-29"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-35" style="background:;">
+      <slide class="" id="slide-37" style="background:;">
   <hgroup>
     <h2>Tidy data</h2>
   </hgroup>
@@ -913,7 +1005,7 @@ str(soiltempdata$Depth.100.cm)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-36" style="background:;">
+      <slide class="" id="slide-38" style="background:;">
   <hgroup>
     <h2>Loading in packages</h2>
   </hgroup>
@@ -934,7 +1026,7 @@ str(soiltempdata$Depth.100.cm)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-37" style="background:;">
+      <slide class="" id="slide-39" style="background:;">
   <hgroup>
     <h2>Reshaping data</h2>
   </hgroup>
@@ -961,7 +1053,7 @@ head(soiltemp_melt)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-38" style="background:;">
+      <slide class="" id="slide-40" style="background:;">
   <hgroup>
     <h2>Poor depths</h2>
   </hgroup>
@@ -986,7 +1078,7 @@ head(soiltemp_melt)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-39" style="background:;">
+      <slide class="" id="slide-41" style="background:;">
   <hgroup>
     <h2>Regex</h2>
   </hgroup>
@@ -1008,7 +1100,7 @@ str(num_matches)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-40" style="background:;">
+      <slide class="" id="slide-42" style="background:;">
   <hgroup>
     <h2>From Regex to reality</h2>
   </hgroup>
@@ -1031,7 +1123,7 @@ head(depth_nums)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="quiz" id="slide-41" style="background:;">
+      <slide class="quiz" id="slide-43" style="background:;">
   <hgroup>
     <h2>Stop and check quiz</h2>
   </hgroup>
@@ -1067,7 +1159,7 @@ head(depth_nums)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-42" style="background:;">
+      <slide class="" id="slide-44" style="background:;">
   <hgroup>
     <h2>Plots again</h2>
   </hgroup>
@@ -1077,13 +1169,13 @@ head(depth_nums)
 <pre><code class="r">plot(Temperature ~ Depth, data = soiltemp_melt)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-35.png" alt="plot of chunk unnamed-chunk-35"> </p>
+<p><img src="figure/unnamed-chunk-36.png" alt="plot of chunk unnamed-chunk-36"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-43" style="background:;">
+      <slide class="" id="slide-45" style="background:;">
   <hgroup>
     <h2>Depth boxplots</h2>
   </hgroup>
@@ -1093,13 +1185,13 @@ head(depth_nums)
 <pre><code class="r">boxplot(Temperature ~ Depth, data = soiltemp_melt, xlab = &quot;Depth&quot;, ylab = &quot;Temperature&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-36.png" alt="plot of chunk unnamed-chunk-36"> </p>
+<p><img src="figure/unnamed-chunk-37.png" alt="plot of chunk unnamed-chunk-37"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-44" style="background:;">
+      <slide class="" id="slide-46" style="background:;">
   <hgroup>
     <h2>plyr</h2>
   </hgroup>
@@ -1131,7 +1223,7 @@ depth_mean
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-45" style="background:;">
+      <slide class="" id="slide-47" style="background:;">
   <hgroup>
     <h2>Plotting summaries</h2>
   </hgroup>
@@ -1141,13 +1233,13 @@ depth_mean
 <pre><code class="r">plot(meandepth ~ Depth, data = depth_mean)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-38.png" alt="plot of chunk unnamed-chunk-38"> </p>
+<p><img src="figure/unnamed-chunk-39.png" alt="plot of chunk unnamed-chunk-39"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-46" style="background:;">
+      <slide class="" id="slide-48" style="background:;">
   <hgroup>
     <h2>More complex summaries</h2>
   </hgroup>
@@ -1169,7 +1261,7 @@ head(depthday_dist, 2)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-47" style="background:;">
+      <slide class="" id="slide-49" style="background:;">
   <hgroup>
     <h2>ggplot2</h2>
   </hgroup>
@@ -1183,13 +1275,13 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
 <pre><code>## Warning: Removed 24 rows containing missing values (geom_point).
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-40.png" alt="plot of chunk unnamed-chunk-40"> </p>
+<p><img src="figure/unnamed-chunk-41.png" alt="plot of chunk unnamed-chunk-41"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-48" style="background:;">
+      <slide class="" id="slide-50" style="background:;">
   <hgroup>
     <h2>Adding a little bit of colour</h2>
   </hgroup>
@@ -1200,13 +1292,13 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
     geom_line() + labs(colour = &quot;Depth&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-41.png" alt="plot of chunk unnamed-chunk-41"> </p>
+<p><img src="figure/unnamed-chunk-42.png" alt="plot of chunk unnamed-chunk-42"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-49" style="background:;">
+      <slide class="" id="slide-51" style="background:;">
   <hgroup>
     <h2>ggplot2</h2>
   </hgroup>
@@ -1217,13 +1309,13 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
     ncol = 3)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-42.png" alt="plot of chunk unnamed-chunk-42"> </p>
+<p><img src="figure/unnamed-chunk-43.png" alt="plot of chunk unnamed-chunk-43"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-50" style="background:;">
+      <slide class="" id="slide-52" style="background:;">
   <hgroup>
     <h2>Linear models</h2>
   </hgroup>
@@ -1241,7 +1333,7 @@ temp5 &lt;- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-51" style="background:;">
+      <slide class="" id="slide-53" style="background:;">
   <hgroup>
     <h2>Getting things out of a linear model</h2>
   </hgroup>
@@ -1283,24 +1375,24 @@ temp5 &lt;- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-52" style="background:;">
+      <slide class="" id="slide-54" style="background:;">
   <hgroup>
     <h2>Linear models: Plot</h2>
   </hgroup>
   <article>
     <p>Let&#39;s plot the previous data and fitted linear model:</p>
 
-<pre><code class="r">plot(temp0, temp5)
+<pre><code class="r">plot(temp5, temp0)
 abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-47.png" alt="plot of chunk unnamed-chunk-47"> </p>
+<p><img src="figure/unnamed-chunk-48.png" alt="plot of chunk unnamed-chunk-48"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-53" style="background:;">
+      <slide class="" id="slide-55" style="background:;">
   <hgroup>
     <h2>Fun to look forward to:</h2>
   </hgroup>
@@ -1319,7 +1411,7 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-54" style="background:;">
+      <slide class="" id="slide-56" style="background:;">
   <hgroup>
     <h2>googleVis</h2>
   </hgroup>
@@ -1328,14 +1420,14 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 
 <!-- LineChart generated in R 2.15.2 by googleVis 0.4.1 package -->
 
-<!-- Mon Mar 04 14:00:43 2013 -->
+<!-- Mon Mar 04 16:29:14 2013 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataLineChartID19602cac542d () {
+function gvisDataLineChartID196035643921 () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -27555,8 +27647,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartLineChartID19602cac542d() {
-  var data = gvisDataLineChartID19602cac542d();
+function drawChartLineChartID196035643921() {
+  var data = gvisDataLineChartID196035643921();
   var options = {};
 options["allowHtml"] = true;
 options["width"] =   1000;
@@ -27568,7 +27660,7 @@ options["legend"] = "none";
 options["title"] = "Alaskan surface soil temperature";
 
      var chart = new google.visualization.LineChart(
-       document.getElementById('LineChartID19602cac542d')
+       document.getElementById('LineChartID196035643921')
      );
      chart.draw(data,options);
     
@@ -27577,7 +27669,7 @@ options["title"] = "Alaskan surface soil temperature";
   
  
 // jsDisplayChart
-function displayChartLineChartID19602cac542d() {
+function displayChartLineChartID196035643921() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   var chartid = "corechart";
@@ -27592,7 +27684,7 @@ function displayChartLineChartID19602cac542d() {
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartLineChartID19602cac542d);
+  callbacks.push(drawChartLineChartID196035643921);
 
   window.clearTimeout(window.__gvisLoad);
   window.__gvisLoad = setTimeout(function() {
@@ -27609,12 +27701,12 @@ function displayChartLineChartID19602cac542d() {
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID19602cac542d"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID196035643921"></script>
  
 
 <!-- divChart -->
 
-<div id="LineChartID19602cac542d"
+<div id="LineChartID196035643921"
   style="width: 1000px; height: 500px;">
 </div>
 
@@ -27622,7 +27714,7 @@ function displayChartLineChartID19602cac542d() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-55" style="background:;">
+      <slide class="" id="slide-57" style="background:;">
   <hgroup>
     <h2>Soil profiles</h2>
   </hgroup>
@@ -27635,7 +27727,7 @@ function displayChartLineChartID19602cac542d() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-56" style="background:;">
+      <slide class="" id="slide-58" style="background:;">
   <hgroup>
     <h2>Georeferenced data</h2>
   </hgroup>
@@ -27648,27 +27740,31 @@ function displayChartLineChartID19602cac542d() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-57" style="background:;">
+      <slide class="" id="slide-59" style="background:;">
   <hgroup>
     <h2>Now your turn</h2>
   </hgroup>
   <article>
     <ul>
-<li>Here is a new data set</li>
-<li>Here is what I want you to do 
+<li>Here is a new data set
 
 <ul>
-<li>This thing</li>
-<li>This thing</li>
+<li>It is NRCS data of soil around Indonesia</li>
 </ul></li>
-<li>Go nuts</li>
+<li>Things to try:
+
+<ul>
+<li>Read in the data</li>
+<li>Make some basic graphs</li>
+<li>Do some basic regression</li>
+</ul></li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-58" style="background:;">
+      <slide class="" id="slide-60" style="background:;">
   <hgroup>
     <h2>Bibliography</h2>
   </hgroup>
