@@ -211,10 +211,19 @@ At the moment, the help files will be fairly hard to get through, but they make 
 
 Now we're ready to deal with some real data. The University of Alaska Fairbanks has some soil temperature data from 2011. The best function to read in CSVs is `read.csv`. Let's store that object and call it `soiltempdata`. 
 
-```{r, cache=TRUE}
+```{r, cache=TRUE, echo=FALSE}
+url <- "https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv"
+if (.Platform$OS.type == 'unix') {
+  download.file(url,'soiltempdata2.csv','curl')
+  soiltempdata <- read.csv('soiltempdata2.csv')
+} else soiltempdata <- read.csv(url)
+```
+
+```{r, cache=TRUE, eval=FALSE}
 url <- "https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv"
 soiltempdata <- read.csv(url)
 ```
+
 
 That looks like it went through nicely. No errors, no complaints.
 
@@ -342,13 +351,23 @@ summary(soiltempdata)
 
 ## Histogram
 
-* Histogram of depth 0.
+A simple exploratory analysis could start, for example, with and histogram of the data to observe the distribution of the data. Try using the function `hist` with the temperatures at depth 0:
+
+```{r}
+hist(soiltempdata$Depth.0.cm)
+```
+
+(Pretty skewed, uh!)
 
 ---
 
 ## Boxplots
 
-* Soil temp by month
+Other simple and useful plot is the boxplot. Using again the soil temperature at depth 0 and the function `boxplot`:
+
+```{r}
+boxplot(Depth.0.cm~Month,data=soiltempdata,xlab='Month',ylab='Temperature')
+```
 
 ---
 
@@ -363,9 +382,11 @@ plot(soiltempdata$ID, soiltempdata$Depth.0.cm, type="l")
 ---
 
 ## Plotting a subset
-What if we're only interested in one month? Say we're only interested in January (month 1)?
-* Line plot of January
-* Histogram of midday temperatures (hour=12)
+What if we have a special interest in temperature midday temperatures? Let's create a histogram of midday temperatures at depth 0:
+
+```{r}
+hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
+```
 
 ---
 
@@ -557,14 +578,37 @@ ggplot(soiltemp_melt, aes(x=ID, y=Temperature)) +
 
 ---
 
-## correlation
+## Linear models
+
+If we want to check the relation between, for example, the temperature at depth 0 and depth 5, we can use the function `lm`
+
+```{r,echo=FALSE}
+temp0 <- soiltemp_melt$Temperature[soiltemp_melt$Depth == 0]
+temp5 <- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
+```
+
+```{r}
+linear_model <- lm(temp0~temp5) ## temp0 and temp5 stored as subsets
+```
+We can access some important information using `$`:
+```{r}
+linear_model$coefficients
+```
+Or using `$` in combination with `summary`:
+```{r}
+summary(linear_model)$r.squared
+```
 
 ---
 
-## lm
+## Linear models: Plot
 
-* temp~depth
-* temp~depth+month
+Let's plot the previous data and fitted linear model:
+
+```{r}
+plot(temp0,temp5)
+abline(linear_model,col='blue',lwd=2)
+```
 
 ---
 
@@ -578,6 +622,7 @@ When you have a bit more R experience, you can make graphs like the following:
 * This presentation
 * Soil graphs (from different data)
 * Map with points in R
+![](images/rconsole.png)
 
 ---
 
@@ -598,6 +643,22 @@ M <- gvisLineChart(gvistempdata, xvar="Time", yvar="Temperature", options=list(w
 
 print(M, "chart")
 ```
+
+---
+
+## Soil profiles
+
+Plot soil profiles with the help of package `aqp`:
+
+![](images/profiles.png)
+
+---
+
+## Georeferenced data
+
+Plot soil profiles locations:
+
+![](images/map.png)
 
 ---
 
