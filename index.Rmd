@@ -160,7 +160,7 @@ If you think about it, you can treat numbers as letters, but it's a lot harder t
 
 ## Even bigger data
 
-Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we'll use a simple dataset which comes with R: `trees`.
+Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we'll use a simple dataset which comes with R: `trees`. It is a data frame, a collection of vectors as columns. The vectors are allowed to be different types (character, integer, numeric).
 
 ```{r}
 head(trees)
@@ -176,6 +176,63 @@ The basic form of a subset is `object[whichrows, whichcolumns]`. Leaving an elem
 trees[3, ]
 trees[ ,2]
 ```
+
+---
+
+## Finer subsetting
+
+We can get individual values by setting both rows and columns
+
+```{r}
+trees[3, 2]
+trees[1, 1]
+```
+
+---
+
+## The last elements
+
+And we can also use `ncol` and `nrow` to get the last elements:
+
+```{r}
+ncol(trees)
+trees[nrow(trees), ]
+trees[, ncol(trees)]
+```
+
+---
+
+## Why stop at one?
+
+You can also subset collections of elements. To get the fourth to seventh row of the first and third column:
+
+```{r}
+trees[4:7, c(1, 3)]
+```
+
+---
+
+## Other ways of extracting columns
+
+Data frames are collections of vectors, so you can use their names to extract them. You can use your original notation and also `$` notation (which is convenient, but not as powerful).
+
+```{r}
+trees[, "Height"]
+trees$Height
+```
+
+---&radio .quiz
+
+### What is the number in the third last row of the 2nd column of `trees`?
+
+1. _80_
+2. 87
+3. 65
+4. 10.3
+
+***explanation
+
+Using the line `trees[nrow(trees) - 2, 2]` will get you the third last row of the second column. Third last is the last one minus 2 places.
 
 ---
 
@@ -633,9 +690,7 @@ We can make your first plot a lot fancier if we want:
 ```{r, results='asis', cache=TRUE, echo=FALSE}
 suppressPackageStartupMessages(library(googleVis))
 
-#soiltempdata <- transform(soiltempdata, Time=paste0(Year, "-", Month, "-", Day, " ", sprintf("%02i", Hour), ":00:00"))
 gvistempdata <- transform(soiltempdata, Time=strptime(paste0(Year, "-", Month, "-", Day, " ", sprintf("%02i", Hour), ":00:00"), tz="America/Anchorage", format="%Y-%m-%d %H:%M:%S"))
-# gvistempdata <- transform(soiltempdata, Time=paste0(sprintf("%02i", Hour), ":00 ", month.name[Month], " ", sprintf("%02i", Day, ", ", "Year")))
 
 names(gvistempdata)[grep("Depth.0.cm", names(gvistempdata), fixed=TRUE)] <- "Temperature"
 
