@@ -135,7 +135,7 @@
   </div>
   
   <div class="quiz-explanation">
-    <p>It&#39;s 3, because \(\frac{6}{2} = 3\)</p>
+    <p>It&#39;s 3, because \(\frac{6}{2} = 3\). Press &#39;p&#39; for further explanation</p>
 
   </div>
 </div>
@@ -576,12 +576,38 @@ greater82[1:5]
   </div>
   
   <div class="quiz-explanation">
-    <p>Using the code <code>trees[trees$Girth &lt; 12.5, ]</code>, we can see that there are 15 trees with a girth less than 12.5</p>
+    <p>Using the code <code>trees[trees$Girth &lt; 12.5, ]</code>, we can see that there are 15 trees with a girth less than 12.5. Press &#39;p&#39; to see the whole expected output.</p>
+
 
   </div>
 </div>
   </article>
   <!-- Presenter Notes -->
+  <aside class="note">
+    <section>
+      <pre><code class="r">trees[trees$Girth &lt; 12.5, ]
+</code></pre>
+
+<pre><code>##    Girth Height Volume
+## 1    8.3     70   10.3
+## 2    8.6     65   10.3
+## 3    8.8     63   10.2
+## 4   10.5     72   16.4
+## 5   10.7     81   18.8
+## 6   10.8     83   19.7
+## 7   11.0     66   15.6
+## 8   11.0     75   18.2
+## 9   11.1     80   22.6
+## 10  11.2     75   19.9
+## 11  11.3     79   24.2
+## 12  11.4     76   21.0
+## 13  11.4     76   21.4
+## 14  11.7     69   21.3
+## 15  12.0     75   19.1
+</code></pre>
+
+    </section>
+  </aside>
 </slide>
 
       <slide class="" id="slide-21" style="background:;">
@@ -935,7 +961,7 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">hist(soiltempdata$Depth.0.cm)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-26.png" alt="plot of chunk unnamed-chunk-26"> </p>
+<p><img src="figure/unnamed-chunk-27.png" alt="plot of chunk unnamed-chunk-27"> </p>
 
 <p>(Pretty skewed, uh!)</p>
 
@@ -953,7 +979,7 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">boxplot(Depth.0.cm ~ Month, data = soiltempdata, xlab = &quot;Month&quot;, ylab = &quot;Temperature&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-27.png" alt="plot of chunk unnamed-chunk-27"> </p>
+<p><img src="figure/unnamed-chunk-28.png" alt="plot of chunk unnamed-chunk-28"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -969,7 +995,7 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">plot(soiltempdata$ID, soiltempdata$Depth.0.cm, type = &quot;l&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-28.png" alt="plot of chunk unnamed-chunk-28"> </p>
+<p><img src="figure/unnamed-chunk-29.png" alt="plot of chunk unnamed-chunk-29"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -985,7 +1011,7 @@ str(soiltempdata$Depth.100.cm)
 <pre><code class="r">hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-29.png" alt="plot of chunk unnamed-chunk-29"> </p>
+<p><img src="figure/unnamed-chunk-30.png" alt="plot of chunk unnamed-chunk-30"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1174,7 +1200,7 @@ head(depth_nums)
 <pre><code class="r">plot(Temperature ~ Depth, data = soiltemp_melt)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-36.png" alt="plot of chunk unnamed-chunk-36"> </p>
+<p><img src="figure/unnamed-chunk-37.png" alt="plot of chunk unnamed-chunk-37"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1190,7 +1216,7 @@ head(depth_nums)
 <pre><code class="r">boxplot(Temperature ~ Depth, data = soiltemp_melt, xlab = &quot;Depth&quot;, ylab = &quot;Temperature&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-37.png" alt="plot of chunk unnamed-chunk-37"> </p>
+<p><img src="figure/unnamed-chunk-38.png" alt="plot of chunk unnamed-chunk-38"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1238,7 +1264,7 @@ depth_mean
 <pre><code class="r">plot(meandepth ~ Depth, data = depth_mean)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-39.png" alt="plot of chunk unnamed-chunk-39"> </p>
+<p><img src="figure/unnamed-chunk-40.png" alt="plot of chunk unnamed-chunk-40"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1280,7 +1306,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
 <pre><code>## Warning: Removed 24 rows containing missing values (geom_point).
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-41.png" alt="plot of chunk unnamed-chunk-41"> </p>
+<p><img src="figure/unnamed-chunk-42.png" alt="plot of chunk unnamed-chunk-42"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1297,7 +1323,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
     geom_line() + labs(colour = &quot;Depth&quot;)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-42.png" alt="plot of chunk unnamed-chunk-42"> </p>
+<p><img src="figure/unnamed-chunk-43.png" alt="plot of chunk unnamed-chunk-43"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1314,7 +1340,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
     ncol = 3)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-43.png" alt="plot of chunk unnamed-chunk-43"> </p>
+<p><img src="figure/unnamed-chunk-44.png" alt="plot of chunk unnamed-chunk-44"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1391,7 +1417,7 @@ temp5 &lt;- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
 abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-48.png" alt="plot of chunk unnamed-chunk-48"> </p>
+<p><img src="figure/unnamed-chunk-49.png" alt="plot of chunk unnamed-chunk-49"> </p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1423,16 +1449,16 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
   <article>
     <p>We can make your first plot a lot fancier if we want:</p>
 
-<!-- LineChart generated in R 2.15.2 by googleVis 0.4.1 package -->
+<!-- LineChart generated in R 2.15.3 by googleVis 0.4.1 package -->
 
-<!-- Mon Mar 04 16:29:14 2013 -->
+<!-- Tue Mar 05 18:50:14 2013 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataLineChartID196035643921 () {
+function gvisDataLineChartID56c5e3b28e5 () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -27652,8 +27678,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartLineChartID196035643921() {
-  var data = gvisDataLineChartID196035643921();
+function drawChartLineChartID56c5e3b28e5() {
+  var data = gvisDataLineChartID56c5e3b28e5();
   var options = {};
 options["allowHtml"] = true;
 options["width"] =   1000;
@@ -27665,7 +27691,7 @@ options["legend"] = "none";
 options["title"] = "Alaskan surface soil temperature";
 
      var chart = new google.visualization.LineChart(
-       document.getElementById('LineChartID196035643921')
+       document.getElementById('LineChartID56c5e3b28e5')
      );
      chart.draw(data,options);
     
@@ -27674,7 +27700,7 @@ options["title"] = "Alaskan surface soil temperature";
   
  
 // jsDisplayChart
-function displayChartLineChartID196035643921() {
+function displayChartLineChartID56c5e3b28e5() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   var chartid = "corechart";
@@ -27689,7 +27715,7 @@ function displayChartLineChartID196035643921() {
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartLineChartID196035643921);
+  callbacks.push(drawChartLineChartID56c5e3b28e5);
 
   window.clearTimeout(window.__gvisLoad);
   window.__gvisLoad = setTimeout(function() {
@@ -27706,12 +27732,12 @@ function displayChartLineChartID196035643921() {
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID196035643921"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID56c5e3b28e5"></script>
  
 
 <!-- divChart -->
 
-<div id="LineChartID196035643921"
+<div id="LineChartID56c5e3b28e5"
   style="width: 1000px; height: 500px;">
 </div>
 

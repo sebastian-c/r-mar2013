@@ -66,7 +66,7 @@ We'll be having a few quizzes like this during this tutorial. No pressure, it's 
 
 *** explanation
 
-It's 3, because $\frac{6}{2} = 3$
+It's 3, because $\frac{6}{2} = 3$. Press 'p' for further explanation
 
 ---
 
@@ -265,7 +265,13 @@ trees[greater82, ]
 
 ***explanation
 
-Using the code `trees[trees$Girth < 12.5, ]`, we can see that there are `r nrow(trees[trees$Girth < 12.5, ])` trees with a girth less than 12.5
+Using the code `trees[trees$Girth < 12.5, ]`, we can see that there are `r nrow(trees[trees$Girth < 12.5, ])` trees with a girth less than 12.5. Press 'p' to see the whole expected output.
+
+***pnotes
+
+```{r}
+trees[trees$Girth < 12.5, ]
+```
 
 ---
 
