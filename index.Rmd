@@ -4,6 +4,7 @@ subtitle    : March 2013
 author      : Sebastian Campbell and José Padarian
 job         : Use the left and right arrow keys to navigate slides.
 logo        : university_sydney_logo.png
+license     : by-nc-nd
 framework   : io2012          # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js    # {highlight.js, prettify, highlight}
 hitheme     : tomorrow        # 
@@ -652,7 +653,7 @@ ggplot(depthday_dist, aes(x=Hour, y=meandepthday)) +
 
 ## Adding a little bit of colour
 
-But how do we tell the points apart? Maybe we could give them different colours and connect the dots by lines? We'll convert Depth to factor so it isn't treated like a number.
+But how do we tell the points apart? Maybe we could give them different colours and connect the dots by lines? We'll convert Depth to factor so it isn't treated like a number (see what happens if you don't convert it to factor).
 
 ```{r}
 ggplot(depthday_dist, aes(x=Hour, y=meandepthday, colour=as.factor(Depth))) +
@@ -671,7 +672,6 @@ ggplot(soiltemp_melt, aes(x=ID, y=Temperature)) +
   geom_line() +
   facet_wrap(~ Depth, ncol=3)
 ```
-
 
 ---
 
@@ -699,6 +699,16 @@ summary(linear_model)
 Or using `$` in combination with `summary`:
 ```{r}
 summary(linear_model)$r.squared
+```
+
+---
+
+## SS tables
+
+We can produce familiar tables containing sum of squares and pvalues using the `anova` function:
+
+```{r}
+anova(linear_model)
 ```
 
 ---
@@ -761,14 +771,24 @@ Plot soil profiles locations:
 
 ---
 
+## This presentation!
+
+This presentation was entirely made in R using some useful packages such as [slidify](http://slidify.org). You can look at the source for it on [GitHub](https://github.com/sebastian-c/r-mar2013).
+
+![](images/thispresentation.png)
+
+---
+
 ## Now your turn
 
 * Here is a new data set
- * It is NRCS data of soil around Indonesia
+ * NRCS data of soil around Indonesia
 * Things to try:
  * Read in the data
  * Make some basic graphs
  * Do some basic regression
+ * Ask questions!
+ * Make mistakes!
 
 ---
 

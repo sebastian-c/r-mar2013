@@ -42,7 +42,13 @@
         <h2>March 2013</h2>
         <p>Sebastian Campbell and José Padarian<br/>Use the left and right arrow keys to navigate slides.</p>
       </hgroup>
-          </slide>
+      
+      <footer class = 'license'>
+        <a href='http://creativecommons.org/licenses/by-nc-nd/3.0/'>
+        <img width = '80px' src = 'http://mirrors.creativecommons.org/presskit/buttons/88x31/png/by-nc-nd.png'>
+        </a>
+      </footer>
+    </slide>
 
     <!-- SLIDES -->
       <slide class="" id="slide-1" style="background:;">
@@ -1317,7 +1323,7 @@ ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
     <h2>Adding a little bit of colour</h2>
   </hgroup>
   <article>
-    <p>But how do we tell the points apart? Maybe we could give them different colours and connect the dots by lines? We&#39;ll convert Depth to factor so it isn&#39;t treated like a number.</p>
+    <p>But how do we tell the points apart? Maybe we could give them different colours and connect the dots by lines? We&#39;ll convert Depth to factor so it isn&#39;t treated like a number (see what happens if you don&#39;t convert it to factor).</p>
 
 <pre><code class="r">ggplot(depthday_dist, aes(x = Hour, y = meandepthday, colour = as.factor(Depth))) + 
     geom_line() + labs(colour = &quot;Depth&quot;)
@@ -1408,6 +1414,30 @@ temp5 &lt;- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
 
       <slide class="" id="slide-54" style="background:;">
   <hgroup>
+    <h2>SS tables</h2>
+  </hgroup>
+  <article>
+    <p>We can produce familiar tables containing sum of squares and pvalues using the <code>anova</code> function:</p>
+
+<pre><code class="r">anova(linear_model)
+</code></pre>
+
+<pre><code>## Analysis of Variance Table
+## 
+## Response: temp0
+##             Df Sum Sq Mean Sq F value Pr(&gt;F)    
+## temp5        1 755095  755095  546054 &lt;2e-16 ***
+## Residuals 6550   9057       1                   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-55" style="background:;">
+  <hgroup>
     <h2>Linear models: Plot</h2>
   </hgroup>
   <article>
@@ -1417,13 +1447,13 @@ temp5 &lt;- soiltemp_melt$Temperature[soiltemp_melt$Depth == 5]
 abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 </code></pre>
 
-<p><img src="figure/unnamed-chunk-49.png" alt="plot of chunk unnamed-chunk-49"> </p>
+<p><img src="figure/unnamed-chunk-50.png" alt="plot of chunk unnamed-chunk-50"> </p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-55" style="background:;">
+      <slide class="" id="slide-56" style="background:;">
   <hgroup>
     <h2>Fun to look forward to:</h2>
   </hgroup>
@@ -1442,7 +1472,7 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-56" style="background:;">
+      <slide class="" id="slide-57" style="background:;">
   <hgroup>
     <h2>googleVis</h2>
   </hgroup>
@@ -1451,14 +1481,14 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 
 <!-- LineChart generated in R 2.15.3 by googleVis 0.4.1 package -->
 
-<!-- Tue Mar 05 18:50:14 2013 -->
+<!-- Tue Mar 05 19:30:00 2013 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataLineChartID56c5e3b28e5 () {
+function gvisDataLineChartID56c3fd835c6 () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -27678,8 +27708,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartLineChartID56c5e3b28e5() {
-  var data = gvisDataLineChartID56c5e3b28e5();
+function drawChartLineChartID56c3fd835c6() {
+  var data = gvisDataLineChartID56c3fd835c6();
   var options = {};
 options["allowHtml"] = true;
 options["width"] =   1000;
@@ -27691,7 +27721,7 @@ options["legend"] = "none";
 options["title"] = "Alaskan surface soil temperature";
 
      var chart = new google.visualization.LineChart(
-       document.getElementById('LineChartID56c5e3b28e5')
+       document.getElementById('LineChartID56c3fd835c6')
      );
      chart.draw(data,options);
     
@@ -27700,7 +27730,7 @@ options["title"] = "Alaskan surface soil temperature";
   
  
 // jsDisplayChart
-function displayChartLineChartID56c5e3b28e5() {
+function displayChartLineChartID56c3fd835c6() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   var chartid = "corechart";
@@ -27715,7 +27745,7 @@ function displayChartLineChartID56c5e3b28e5() {
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartLineChartID56c5e3b28e5);
+  callbacks.push(drawChartLineChartID56c3fd835c6);
 
   window.clearTimeout(window.__gvisLoad);
   window.__gvisLoad = setTimeout(function() {
@@ -27732,12 +27762,12 @@ function displayChartLineChartID56c5e3b28e5() {
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID56c5e3b28e5"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID56c3fd835c6"></script>
  
 
 <!-- divChart -->
 
-<div id="LineChartID56c5e3b28e5"
+<div id="LineChartID56c3fd835c6"
   style="width: 1000px; height: 500px;">
 </div>
 
@@ -27745,7 +27775,7 @@ function displayChartLineChartID56c5e3b28e5() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-57" style="background:;">
+      <slide class="" id="slide-58" style="background:;">
   <hgroup>
     <h2>Soil profiles</h2>
   </hgroup>
@@ -27758,7 +27788,7 @@ function displayChartLineChartID56c5e3b28e5() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-58" style="background:;">
+      <slide class="" id="slide-59" style="background:;">
   <hgroup>
     <h2>Georeferenced data</h2>
   </hgroup>
@@ -27771,7 +27801,20 @@ function displayChartLineChartID56c5e3b28e5() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-59" style="background:;">
+      <slide class="" id="slide-60" style="background:;">
+  <hgroup>
+    <h2>This presentation!</h2>
+  </hgroup>
+  <article>
+    <p>This presentation was entirely made in R using some useful packages such as <a href="http://slidify.org">slidify</a>. You can look at the source for it on <a href="https://github.com/sebastian-c/r-mar2013">GitHub</a>.</p>
+
+<p><img src="images/thispresentation.png" alt=""></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+      <slide class="" id="slide-61" style="background:;">
   <hgroup>
     <h2>Now your turn</h2>
   </hgroup>
@@ -27780,7 +27823,7 @@ function displayChartLineChartID56c5e3b28e5() {
 <li>Here is a new data set
 
 <ul>
-<li>It is NRCS data of soil around Indonesia</li>
+<li>NRCS data of soil around Indonesia</li>
 </ul></li>
 <li>Things to try:
 
@@ -27788,6 +27831,8 @@ function displayChartLineChartID56c5e3b28e5() {
 <li>Read in the data</li>
 <li>Make some basic graphs</li>
 <li>Do some basic regression</li>
+<li>Ask questions!</li>
+<li>Make mistakes!</li>
 </ul></li>
 </ul>
 
@@ -27795,7 +27840,7 @@ function displayChartLineChartID56c5e3b28e5() {
   <!-- Presenter Notes -->
 </slide>
 
-      <slide class="" id="slide-60" style="background:;">
+      <slide class="" id="slide-62" style="background:;">
   <hgroup>
     <h2>Bibliography</h2>
   </hgroup>
