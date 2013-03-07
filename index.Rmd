@@ -760,7 +760,7 @@ print(M, "chart")
 
 But we can make more complex graphs than that:
 
-```{r}
+```{r, results='asis', cache=TRUE, echo=FALSE}
 daily_mean <- ddply(soiltemp_melt, .(Year, Month, Day, Depth), summarise, Temperature=mean(Temperature, na.rm=TRUE))
 
 gvistempmelt <- transform(daily_mean, 
