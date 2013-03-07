@@ -117,7 +117,7 @@
   <article>
     
 <div class="quiz-single well new">
-  <p>We&#39;ll be having a few quizzes like this during this tutorial. No pressure, it&#39;s just to check your understanding.</p>
+  <p>We&#39;ll be having a few quizzes like this during this tutorial. No pressure, it&#39;s just to check your understanding. Click &#39;Submit&#39; to check if your answer is right. If you give up &#39;Check answer&#39; will give you an answer. &#39;Clear&#39; will allow you to start that quiz from scratch.</p>
 
 <h3>What is the expected result from <code>6 / 2</code>?</h3>
 
@@ -319,7 +319,7 @@ bulk_density
     <h2>Even bigger data</h2>
   </hgroup>
   <article>
-    <p>Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we&#39;ll use a simple dataset which comes with R: <code>trees</code>. It is a data frame, a collection of vectors as columns. The vectors are allowed to be different types (character, integer, numeric).</p>
+    <p>Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we&#39;ll use a simple dataset which comes with R: <code>trees</code> (Try <code>?trees</code> for more information about the data). It is a data frame, a collection of vectors as columns. The vectors are allowed to be different types (character, integer, numeric), but they must all be the same length.</p>
 
 <pre><code class="r">trees
 </code></pre>
@@ -382,6 +382,8 @@ bulk_density
 <pre><code>##  [1] 70 65 63 72 81 83 66 75 80 75 79 76 76 69 75 74 85 86 71 64 78 80 74
 ## [24] 72 77 81 82 80 80 80 87
 </code></pre>
+
+<p>You might have noticed the <code>[24]</code> in the second line of <code>trees[, 2]</code>. This indicates that the 72 next to it is the 24th element of that vector. There just isn&#39;t enough room on the screen to show it all in one line.</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -678,7 +680,9 @@ greater82[1:5]
     <h2>Dataframes</h2>
   </hgroup>
   <article>
-    <p>Now we&#39;re ready to deal with some real data. The University of Alaska Fairbanks has some soil temperature data from 2011. The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
+    <p>Now we&#39;re ready to deal with some real data. We have some soil temperature data (<span rel="tooltip" title="University of Alaska Fairbanks . (2011). _South White Hills Met
+Station (DFM1)_. 
+http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html."><a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html">University of Alaska Fairbanks, 2011</a></span>). The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
 
 <pre><code class="r">url &lt;- &quot;https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv&quot;
 soiltempdata &lt;- read.csv(url)
@@ -1028,7 +1032,8 @@ str(soiltempdata$Depth.100.cm)
     <h2>Tidy data</h2>
   </hgroup>
   <article>
-    <p>At the moment the dataset is usable, but is it tidy (<a href="http://vita.had.co.nz/papers/tidy-data.html">Wickham, 2011</a>)? To be tidy, a dataset must have the following qualities:</p>
+    <p>At the moment the dataset is usable, but is it tidy (<span rel="tooltip" title="Wickham H (2011). Tidy data. _The American Statistician_. 
+http://vita.had.co.nz/papers/tidy-data.html."><a href="http://vita.had.co.nz/papers/tidy-data.html">Wickham, 2011</a></span>)? To be tidy, a dataset must have the following qualities:</p>
 
 <ol>
 <li>Each variable forms a column</li>
@@ -1047,7 +1052,9 @@ str(soiltempdata$Depth.100.cm)
     <h2>Loading in packages</h2>
   </hgroup>
   <article>
-    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> package (<a href="http://www.jstatsoft.org/v21/i12/">Wickham, 2007</a>). You can use the <code>library</code> or the <code>require</code> function to load it.</p>
+    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> package (<span rel="tooltip" title="Wickham H (2007). Reshaping Data with the reshape Package.
+_Journal of Statistical Software_, *21*(12), pp. 1-20. 
+http://www.jstatsoft.org/v21/i12/."><a href="http://www.jstatsoft.org/v21/i12/">Wickham, 2007</a></span>). You can use the <code>library</code> or the <code>require</code> function to load it.</p>
 
 <p>You may get an error:</p>
 
@@ -1303,7 +1310,9 @@ head(depthday_dist, 2)
     <h2>ggplot2</h2>
   </hgroup>
   <article>
-    <p><code>ggplot2</code> is a package which allows you to build up complex plots from basic elements (<a href="http://had.co.nz/ggplot2/book">Wickham, 2009</a>). First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
+    <p><code>ggplot2</code> is a package which allows you to build up complex plots from basic elements (<span rel="tooltip" title="Wickham H (2009). _ggplot2: elegant graphics for data analysis_.
+Springer New York. ISBN 978-0-387-98140-6, 
+http://had.co.nz/ggplot2/book."><a href="http://had.co.nz/ggplot2/book">Wickham, 2009</a></span>). First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
 
 <pre><code class="r">library(ggplot2)
 ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
@@ -27806,7 +27815,9 @@ function displayChartLineChartID109440224f() {
     <h2>This presentation!</h2>
   </hgroup>
   <article>
-    <p>This presentation was entirely made in R using some useful packages such as <a href="http://slidify.org">slidify</a>. You can look at the source for it on <a href="https://github.com/sebastian-c/r-mar2013">GitHub</a>.</p>
+    <p>This presentation was entirely made in R using some useful packages such as <a href="http://slidify.org">slidify</a> (<span rel="tooltip" title="Vaidyanathan R (2012). _slidify: Generate reproducible html5
+slides from R markdown_. R package version 0.3.3, 
+http://ramnathv.github.com/slidify/."><a href="http://ramnathv.github.com/slidify/">Vaidyanathan, 2012</a></span>). You can look at the source for it on <a href="https://github.com/sebastian-c/r-mar2013">GitHub</a>.</p>
 
 <p><img src="images/thispresentation.png" alt=""></p>
 
@@ -27845,7 +27856,15 @@ function displayChartLineChartID109440224f() {
     <h2>Bibliography</h2>
   </hgroup>
   <article>
-    <p><p>Wickham H (2007).
+    <p><p>University of Alaska Fairbanks . (2011).
+<EM>South White Hills Met Station (DFM1)</EM>.
+<a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html"><a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html">http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html</a></a>.</p>
+
+<p><p>Vaidyanathan R (2012).
+<EM>slidify: Generate reproducible html5 slides from R markdown</EM>.
+R package version 0.3.3, <a href="http://ramnathv.github.com/slidify/"><a href="http://ramnathv.github.com/slidify/">http://ramnathv.github.com/slidify/</a></a>.</p>
+
+<p><p>Wickham H (2007).
 &ldquo;Reshaping Data with the reshape Package.&rdquo;
 <EM>Journal of Statistical Software</EM>, <B>21</B>(12), pp. 1&ndash;20.
 <a href="http://www.jstatsoft.org/v21/i12/"><a href="http://www.jstatsoft.org/v21/i12/">http://www.jstatsoft.org/v21/i12/</a></a>.</p>

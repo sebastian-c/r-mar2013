@@ -56,7 +56,7 @@ Note that there are other operators we can use, like `*` for multiplications, `-
 
 ## Quick quiz
 
-We'll be having a few quizzes like this during this tutorial. No pressure, it's just to check your understanding.
+We'll be having a few quizzes like this during this tutorial. No pressure, it's just to check your understanding. Click 'Submit' to check if your answer is right. If you give up 'Check answer' will give you an answer. 'Clear' will allow you to start that quiz from scratch.
 
 ### What is the expected result from `6 / 2`?
 
@@ -164,7 +164,7 @@ If you think about it, you can treat numbers as letters, but it's a lot harder t
 
 ## Even bigger data
 
-Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we'll use a simple dataset which comes with R: `trees`. It is a data frame, a collection of vectors as columns. The vectors are allowed to be different types (character, integer, numeric).
+Now that we can make vectors we can make subsets of bigger datasets, matrices and dataframes. Just to start off, we'll use a simple dataset which comes with R: `trees` (Try `?trees` for more information about the data). It is a data frame, a collection of vectors as columns. The vectors are allowed to be different types (character, integer, numeric), but they must all be the same length.
 
 ```{r}
 trees
@@ -178,8 +178,10 @@ The basic form of a subset is `object[whichrows, whichcolumns]`. Leaving an elem
 
 ```{r}
 trees[3, ]
-trees[ ,2]
+trees[, 2]
 ```
+
+You might have noticed the `[24]` in the second line of `trees[, 2]`. This indicates that the 72 next to it is the 24th element of that vector. There just isn't enough room on the screen to show it all in one line.
 
 ---
 
@@ -306,7 +308,7 @@ At the moment, the help files will be fairly hard to get through, but they make 
 
 ## Dataframes
 
-Now we're ready to deal with some real data. The University of Alaska Fairbanks has some soil temperature data from 2011. The best function to read in CSVs is `read.csv`. Let's store that object and call it `soiltempdata`. 
+Now we're ready to deal with some real data. We have some soil temperature data `r citep(bib["UniversityofAlaskaFairbanks2011"])`. The best function to read in CSVs is `read.csv`. Let's store that object and call it `soiltempdata`. 
 
 ```{r, cache=TRUE, echo=FALSE}
 url <- "https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv"
@@ -774,7 +776,7 @@ Plot soil profiles locations:
 
 ## This presentation!
 
-This presentation was entirely made in R using some useful packages such as [slidify](http://slidify.org). You can look at the source for it on [GitHub](https://github.com/sebastian-c/r-mar2013).
+This presentation was entirely made in R using some useful packages such as [slidify](http://slidify.org) `r citep(bib["Vaidyanathan2012"])`. You can look at the source for it on [GitHub](https://github.com/sebastian-c/r-mar2013).
 
 ![](images/thispresentation.png)
 
