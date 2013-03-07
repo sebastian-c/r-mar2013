@@ -769,7 +769,7 @@ gvistempmelt <- transform(daily_mean,
                           Time=as.Date(paste0(Year, "-", Month, "-", Day)), 
                           ID=1:nrow(daily_mean), 
                           Depth=as.factor(sprintf("%03i", Depth)))
-N <- gvisMotionChart(gvistempmelt,id="Depth", timevar="Time", yvar="Temperature")
+N <- gvisMotionChart(gvistempmelt,id="Depth", timevar="Time", yvar="Temperature", options=list(state='\n{"nonSelectedAlpha":0,"yAxisOption":"3","xLambda":1,"colorOption":"_UNIQUE_COLOR","orderedByY":false,"time":"2011-05-07","yZoomedIn":false,"iconKeySettings":[],"duration":{"timeUnit":"D","multiplier":1},"xZoomedDataMax":11,"yZoomedDataMax":23.91175,"xZoomedDataMin":0,"sizeOption":"_UNISIZE","dimensions":{"iconDimensions":["dim0"]},"playDuration":15000,"yZoomedDataMin":-10.77833333,"xZoomedIn":false,"yLambda":1,"orderedByX":true,"iconType":"VBAR","xAxisOption":"_ALPHABETICAL","uniColorForNonSelected":false,"showTrails":false}', showChartButtons=FALSE, showAdvancedPanel=FALSE))
 
 print(N, "chart")
 ```

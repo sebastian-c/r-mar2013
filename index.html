@@ -680,9 +680,7 @@ greater82[1:5]
     <h2>Dataframes</h2>
   </hgroup>
   <article>
-    <p>Now we&#39;re ready to deal with some real data. We have some soil temperature data (<span rel="tooltip" title="University of Alaska Fairbanks . (2011). _South White Hills Met
-Station (DFM1)_. 
-http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html."><a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html">University of Alaska Fairbanks, 2011</a></span>). The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
+    <p>Now we&#39;re ready to deal with some real data. We have some soil temperature data (<a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html">University of Alaska Fairbanks, 2011</a>). The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
 
 <pre><code class="r">url &lt;- &quot;https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv&quot;
 soiltempdata &lt;- read.csv(url)
@@ -1032,8 +1030,7 @@ str(soiltempdata$Depth.100.cm)
     <h2>Tidy data</h2>
   </hgroup>
   <article>
-    <p>At the moment the dataset is usable, but is it tidy (<span rel="tooltip" title="Wickham H (2011). Tidy data. _The American Statistician_. 
-http://vita.had.co.nz/papers/tidy-data.html."><a href="http://vita.had.co.nz/papers/tidy-data.html">Wickham, 2011</a></span>)? To be tidy, a dataset must have the following qualities:</p>
+    <p>At the moment the dataset is usable, but is it tidy (<a href="http://vita.had.co.nz/papers/tidy-data.html">Wickham, 2011</a>)? To be tidy, a dataset must have the following qualities:</p>
 
 <ol>
 <li>Each variable forms a column</li>
@@ -1052,9 +1049,7 @@ http://vita.had.co.nz/papers/tidy-data.html."><a href="http://vita.had.co.nz/pap
     <h2>Loading in packages</h2>
   </hgroup>
   <article>
-    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> package (<span rel="tooltip" title="Wickham H (2007). Reshaping Data with the reshape Package.
-_Journal of Statistical Software_, *21*(12), pp. 1-20. 
-http://www.jstatsoft.org/v21/i12/."><a href="http://www.jstatsoft.org/v21/i12/">Wickham, 2007</a></span>). You can use the <code>library</code> or the <code>require</code> function to load it.</p>
+    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> package (<a href="http://www.jstatsoft.org/v21/i12/">Wickham, 2007</a>). You can use the <code>library</code> or the <code>require</code> function to load it.</p>
 
 <p>You may get an error:</p>
 
@@ -1310,9 +1305,7 @@ head(depthday_dist, 2)
     <h2>ggplot2</h2>
   </hgroup>
   <article>
-    <p><code>ggplot2</code> is a package which allows you to build up complex plots from basic elements (<span rel="tooltip" title="Wickham H (2009). _ggplot2: elegant graphics for data analysis_.
-Springer New York. ISBN 978-0-387-98140-6, 
-http://had.co.nz/ggplot2/book."><a href="http://had.co.nz/ggplot2/book">Wickham, 2009</a></span>). First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
+    <p><code>ggplot2</code> is a package which allows you to build up complex plots from basic elements (<a href="http://had.co.nz/ggplot2/book">Wickham, 2009</a>). First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
 
 <pre><code class="r">library(ggplot2)
 ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
@@ -27793,14 +27786,14 @@ function displayChartLineChartID109440224f() {
 
 <!-- MotionChart generated in R 2.15.3 by googleVis 0.4.1 package -->
 
-<!-- Thu Mar 07 13:10:15 2013 -->
+<!-- Thu Mar 07 15:36:05 2013 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataMotionChartIDd2825f42b10 () {
+function gvisDataMotionChartID17b05aa81118 () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -57301,14 +57294,17 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartMotionChartIDd2825f42b10() {
-  var data = gvisDataMotionChartIDd2825f42b10();
+function drawChartMotionChartID17b05aa81118() {
+  var data = gvisDataMotionChartID17b05aa81118();
   var options = {};
 options["width"] =    600;
 options["height"] =    500;
+options["state"] = "\n{\"nonSelectedAlpha\":0,\"yAxisOption\":\"3\",\"xLambda\":1,\"colorOption\":\"_UNIQUE_COLOR\",\"orderedByY\":false,\"time\":\"2011-05-07\",\"yZoomedIn\":false,\"iconKeySettings\":[],\"duration\":{\"timeUnit\":\"D\",\"multiplier\":1},\"xZoomedDataMax\":11,\"yZoomedDataMax\":23.91175,\"xZoomedDataMin\":0,\"sizeOption\":\"_UNISIZE\",\"dimensions\":{\"iconDimensions\":[\"dim0\"]},\"playDuration\":15000,\"yZoomedDataMin\":-10.77833333,\"xZoomedIn\":false,\"yLambda\":1,\"orderedByX\":true,\"iconType\":\"VBAR\",\"xAxisOption\":\"_ALPHABETICAL\",\"uniColorForNonSelected\":false,\"showTrails\":false}";
+options["showChartButtons"] = false;
+options["showAdvancedPanel"] = false;
 
      var chart = new google.visualization.MotionChart(
-       document.getElementById('MotionChartIDd2825f42b10')
+       document.getElementById('MotionChartID17b05aa81118')
      );
      chart.draw(data,options);
     
@@ -57317,7 +57313,7 @@ options["height"] =    500;
   
  
 // jsDisplayChart
-function displayChartMotionChartIDd2825f42b10() {
+function displayChartMotionChartID17b05aa81118() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   var chartid = "motionchart";
@@ -57332,7 +57328,7 @@ function displayChartMotionChartIDd2825f42b10() {
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartMotionChartIDd2825f42b10);
+  callbacks.push(drawChartMotionChartID17b05aa81118);
 
   window.clearTimeout(window.__gvisLoad);
   window.__gvisLoad = setTimeout(function() {
@@ -57349,12 +57345,12 @@ function displayChartMotionChartIDd2825f42b10() {
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartIDd2825f42b10"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartMotionChartID17b05aa81118"></script>
  
 
 <!-- divChart -->
 
-<div id="MotionChartIDd2825f42b10"
+<div id="MotionChartID17b05aa81118"
   style="width: 600px; height: 500px;">
 </div>
 
@@ -57393,9 +57389,7 @@ function displayChartMotionChartIDd2825f42b10() {
     <h2>This presentation!</h2>
   </hgroup>
   <article>
-    <p>This presentation was entirely made in R using some useful packages such as <a href="http://slidify.org">slidify</a> (<span rel="tooltip" title="Vaidyanathan R (2012). _slidify: Generate reproducible html5
-slides from R markdown_. R package version 0.3.3, 
-http://ramnathv.github.com/slidify/."><a href="http://ramnathv.github.com/slidify/">Vaidyanathan, 2012</a></span>). You can look at the source for it on <a href="https://github.com/sebastian-c/r-mar2013">GitHub</a>.</p>
+    <p>This presentation was entirely made in R using some useful packages such as <a href="http://slidify.org">slidify</a> (<a href="http://ramnathv.github.com/slidify/">Vaidyanathan, 2012</a>). You can look at the source for it on <a href="https://github.com/sebastian-c/r-mar2013">GitHub</a>.</p>
 
 <p><img src="images/thispresentation.png" alt=""></p>
 
