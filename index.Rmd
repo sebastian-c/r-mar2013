@@ -67,7 +67,7 @@ We'll be having a few quizzes like this during this tutorial. No pressure, it's 
 
 *** explanation
 
-It's 3, because $\frac{6}{2} = 3$. Press 'p' for further explanation
+It's 3, because $\frac{6}{2} = 3$.
 
 ---
 
@@ -739,7 +739,7 @@ When you have a bit more R experience, you can make graphs like the following:
 
 ## googleVis
 
-We can make your first plot a lot fancier if we want:
+We can make your first plot a lot fancier if we want (hover your mouse over it):
 
 ```{r, results='asis', cache=TRUE, echo=FALSE}
 suppressPackageStartupMessages(library(googleVis))
@@ -759,7 +759,7 @@ print(M, "chart")
 
 Plot soil profiles with the help of package `aqp`:
 
-![](images/profiles.png)
+<img src="images/profiles.png" style="margin:0px auto;display:block">
 
 ---
 
@@ -767,7 +767,7 @@ Plot soil profiles with the help of package `aqp`:
 
 Plot soil profiles locations:
 
-![](images/map.png)
+<img src="images/map.png" style="margin:0px auto;display:block">
 
 ---
 
