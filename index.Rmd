@@ -438,7 +438,7 @@ And now it's full of NAs (missing values), as it should be.
 
 ## Summaries
 
-Summaries of a dataframe's columns can easily be obtained with `summary`:
+A summary of a dataframe's columns can easily be obtained with `summary`:
 
 ```{r}
 summary(soiltempdata)
@@ -448,23 +448,13 @@ summary(soiltempdata)
 
 ## Histogram
 
-A simple exploratory analysis could start, for example, with and histogram of the data to observe the distribution of the data. Try using the function `hist` with the temperatures at depth 0:
+A simple exploratory analysis could start, for example, with a histogram of the data to observe the distribution of the data. Try using the function `hist` with the temperatures at depth 0:
 
 ```{r}
 hist(soiltempdata$Depth.0.cm)
 ```
 
-(Pretty skewed, uh!)
-
----
-
-## Boxplots
-
-Other simple and useful plot is the boxplot. Using again the soil temperature at depth 0 and the function `boxplot`:
-
-```{r}
-boxplot(Depth.0.cm~Month,data=soiltempdata,xlab='Month',ylab='Temperature')
-```
+(Pretty skewed, huh?)
 
 ---
 
@@ -484,6 +474,17 @@ What if we have a special interest in temperature midday temperatures? Let's cre
 ```{r}
 hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
 ```
+
+---
+
+## Boxplots
+
+Another simple and useful plot is the boxplot. Again, using the soil temperature at depth 0 and the function `boxplot`. Note that we can fix up those messy axis labels with the `xlab` and `ylab` arguments:
+
+```{r}
+boxplot(Depth.0.cm~Month,data=soiltempdata,xlab='Month',ylab='Temperature')
+```
+
 
 ---
 
@@ -537,7 +538,7 @@ See now we have depth in one column and temperature in another. That's not reall
 table(soiltemp_melt$Depth)
 ```
 
-There are 6552 of each Depth measurement. But wouldn't it be nice if we had only the depth in cm instead of all the text?
+There are 6552 of each Depth measurement. But the depth measurement isn't a number, it's a character with a number in it. What if we could get that number out and use this column as a numeric (like Temperature is)?
 
 ---
 

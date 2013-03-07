@@ -911,7 +911,7 @@ str(soiltempdata$Depth.100.cm)
     <h2>Summaries</h2>
   </hgroup>
   <article>
-    <p>Summaries of a dataframe&#39;s columns can easily be obtained with <code>summary</code>:</p>
+    <p>A summary of a dataframe&#39;s columns can easily be obtained with <code>summary</code>:</p>
 
 <pre><code class="r">summary(soiltempdata)
 </code></pre>
@@ -962,14 +962,14 @@ str(soiltempdata$Depth.100.cm)
     <h2>Histogram</h2>
   </hgroup>
   <article>
-    <p>A simple exploratory analysis could start, for example, with and histogram of the data to observe the distribution of the data. Try using the function <code>hist</code> with the temperatures at depth 0:</p>
+    <p>A simple exploratory analysis could start, for example, with a histogram of the data to observe the distribution of the data. Try using the function <code>hist</code> with the temperatures at depth 0:</p>
 
 <pre><code class="r">hist(soiltempdata$Depth.0.cm)
 </code></pre>
 
 <p><img src="figure/unnamed-chunk-27.png" alt="plot of chunk unnamed-chunk-27"> </p>
 
-<p>(Pretty skewed, uh!)</p>
+<p>(Pretty skewed, huh?)</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -977,12 +977,12 @@ str(soiltempdata$Depth.100.cm)
 
       <slide class="" id="slide-34" style="background:;">
   <hgroup>
-    <h2>Boxplots</h2>
+    <h2>Plotting</h2>
   </hgroup>
   <article>
-    <p>Other simple and useful plot is the boxplot. Using again the soil temperature at depth 0 and the function <code>boxplot</code>:</p>
+    <p>We can now do some basic plotting. Let&#39;s look at the 0cm depth over time. This is easy using the <code>plot</code> function. We need specify the x variable and the y variable. We&#39;ll use the <code>type=&quot;l&quot;</code> argument to make it a line plot (the default has points):</p>
 
-<pre><code class="r">boxplot(Depth.0.cm ~ Month, data = soiltempdata, xlab = &quot;Month&quot;, ylab = &quot;Temperature&quot;)
+<pre><code class="r">plot(soiltempdata$ID, soiltempdata$Depth.0.cm, type = &quot;l&quot;)
 </code></pre>
 
 <p><img src="figure/unnamed-chunk-28.png" alt="plot of chunk unnamed-chunk-28"> </p>
@@ -993,12 +993,12 @@ str(soiltempdata$Depth.100.cm)
 
       <slide class="" id="slide-35" style="background:;">
   <hgroup>
-    <h2>Plotting</h2>
+    <h2>Plotting a subset</h2>
   </hgroup>
   <article>
-    <p>We can now do some basic plotting. Let&#39;s look at the 0cm depth over time. This is easy using the <code>plot</code> function. We need specify the x variable and the y variable. We&#39;ll use the <code>type=&quot;l&quot;</code> argument to make it a line plot (the default has points):</p>
+    <p>What if we have a special interest in temperature midday temperatures? Let&#39;s create a histogram of midday temperatures at depth 0:</p>
 
-<pre><code class="r">plot(soiltempdata$ID, soiltempdata$Depth.0.cm, type = &quot;l&quot;)
+<pre><code class="r">hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
 </code></pre>
 
 <p><img src="figure/unnamed-chunk-29.png" alt="plot of chunk unnamed-chunk-29"> </p>
@@ -1009,12 +1009,12 @@ str(soiltempdata$Depth.100.cm)
 
       <slide class="" id="slide-36" style="background:;">
   <hgroup>
-    <h2>Plotting a subset</h2>
+    <h2>Boxplots</h2>
   </hgroup>
   <article>
-    <p>What if we have a special interest in temperature midday temperatures? Let&#39;s create a histogram of midday temperatures at depth 0:</p>
+    <p>Another simple and useful plot is the boxplot. Again, using the soil temperature at depth 0 and the function <code>boxplot</code>. Note that we can fix up those messy axis labels with the <code>xlab</code> and <code>ylab</code> arguments:</p>
 
-<pre><code class="r">hist(soiltempdata$Depth.0.cm[soiltempdata$Hour == 12])
+<pre><code class="r">boxplot(Depth.0.cm ~ Month, data = soiltempdata, xlab = &quot;Month&quot;, ylab = &quot;Temperature&quot;)
 </code></pre>
 
 <p><img src="figure/unnamed-chunk-30.png" alt="plot of chunk unnamed-chunk-30"> </p>
@@ -1109,7 +1109,7 @@ head(soiltemp_melt)
 ##         6552         6552
 </code></pre>
 
-<p>There are 6552 of each Depth measurement. But wouldn&#39;t it be nice if we had only the depth in cm instead of all the text?</p>
+<p>There are 6552 of each Depth measurement. But the depth measurement isn&#39;t a number, it&#39;s a character with a number in it. What if we could get that number out and use this column as a numeric (like Temperature is)?</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -1481,14 +1481,14 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 
 <!-- LineChart generated in R 2.15.3 by googleVis 0.4.1 package -->
 
-<!-- Tue Mar 05 19:30:00 2013 -->
+<!-- Thu Mar 07 12:48:36 2013 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataLineChartID56c3fd835c6 () {
+function gvisDataLineChartID109440224f () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -27708,8 +27708,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartLineChartID56c3fd835c6() {
-  var data = gvisDataLineChartID56c3fd835c6();
+function drawChartLineChartID109440224f() {
+  var data = gvisDataLineChartID109440224f();
   var options = {};
 options["allowHtml"] = true;
 options["width"] =   1000;
@@ -27721,7 +27721,7 @@ options["legend"] = "none";
 options["title"] = "Alaskan surface soil temperature";
 
      var chart = new google.visualization.LineChart(
-       document.getElementById('LineChartID56c3fd835c6')
+       document.getElementById('LineChartID109440224f')
      );
      chart.draw(data,options);
     
@@ -27730,7 +27730,7 @@ options["title"] = "Alaskan surface soil temperature";
   
  
 // jsDisplayChart
-function displayChartLineChartID56c3fd835c6() {
+function displayChartLineChartID109440224f() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   var chartid = "corechart";
@@ -27745,7 +27745,7 @@ function displayChartLineChartID56c3fd835c6() {
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartLineChartID56c3fd835c6);
+  callbacks.push(drawChartLineChartID109440224f);
 
   window.clearTimeout(window.__gvisLoad);
   window.__gvisLoad = setTimeout(function() {
@@ -27762,12 +27762,12 @@ function displayChartLineChartID56c3fd835c6() {
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID56c3fd835c6"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID109440224f"></script>
  
 
 <!-- divChart -->
 
-<div id="LineChartID56c3fd835c6"
+<div id="LineChartID109440224f"
   style="width: 1000px; height: 500px;">
 </div>
 
