@@ -756,6 +756,25 @@ print(M, "chart")
 
 ---
 
+## googleVis timelines
+
+But we can make more complex graphs than that:
+
+```{r}
+daily_mean <- ddply(soiltemp_melt, .(Year, Month, Day, Depth), summarise, Temperature=mean(Temperature, na.rm=TRUE))
+
+gvistempmelt <- transform(daily_mean, 
+                          Time=as.Date(paste0(Year, "-", Month, "-", Day)), 
+                          ID=1:nrow(daily_mean), 
+                          Depth=as.factor(sprintf("%03i", Depth)))
+N <- gvisMotionChart(gvistempmelt,id="Depth", timevar="Time", yvar="Temperature")
+
+print(N, "chart")
+```
+
+---
+
+
 ## Soil profiles
 
 Plot soil profiles with the help of package `aqp`:
