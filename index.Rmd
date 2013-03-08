@@ -784,7 +784,7 @@ This presentation was entirely made in R using some useful packages such as [sli
 
 ## Now your turn
 
-* Here is a new data set
+* Here is a new [data set](https://raw.github.com/sebastian-c/r-mar2013/gh-pages/training_dataset.csv)
  * NRCS data of soil around Indonesia
 * Things to try:
  * Read in the data

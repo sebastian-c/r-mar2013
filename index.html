@@ -141,7 +141,7 @@
   </div>
   
   <div class="quiz-explanation">
-    <p>It&#39;s 3, because \(\frac{6}{2} = 3\).</p>
+    <p>It&#39;s 3, because $\frac{6}{2} = 3$.</p>
 
   </div>
 </div>
@@ -680,9 +680,7 @@ greater82[1:5]
     <h2>Dataframes</h2>
   </hgroup>
   <article>
-    <p>Now we&#39;re ready to deal with some real data. We have some soil temperature data (<span rel="tooltip" title="University of Alaska Fairbanks . (2011). _South White Hills Met
-Station (DFM1)_. 
-http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html."><a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html">University of Alaska Fairbanks, 2011</a></span>). The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
+    <p>Now we&#39;re ready to deal with some real data. We have some soil temperature data (<a href="http://ine.uaf.edu/werc/projects/foothills/stations/dfm1/historical.html">University of Alaska Fairbanks, 2011</a>). The best function to read in CSVs is <code>read.csv</code>. Let&#39;s store that object and call it <code>soiltempdata</code>. </p>
 
 <pre><code class="r">url &lt;- &quot;https://raw.github.com/sebastian-c/r-mar2013/gh-pages/soiltempdata.csv&quot;
 soiltempdata &lt;- read.csv(url)
@@ -1032,8 +1030,7 @@ str(soiltempdata$Depth.100.cm)
     <h2>Tidy data</h2>
   </hgroup>
   <article>
-    <p>At the moment the dataset is usable, but is it tidy (<span rel="tooltip" title="Wickham H (2011). Tidy data. _The American Statistician_. 
-http://vita.had.co.nz/papers/tidy-data.html."><a href="http://vita.had.co.nz/papers/tidy-data.html">Wickham, 2011</a></span>)? To be tidy, a dataset must have the following qualities:</p>
+    <p>At the moment the dataset is usable, but is it tidy (<a href="http://vita.had.co.nz/papers/tidy-data.html">Wickham, 2011</a>)? To be tidy, a dataset must have the following qualities:</p>
 
 <ol>
 <li>Each variable forms a column</li>
@@ -1052,9 +1049,7 @@ http://vita.had.co.nz/papers/tidy-data.html."><a href="http://vita.had.co.nz/pap
     <h2>Loading in packages</h2>
   </hgroup>
   <article>
-    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> package (<span rel="tooltip" title="Wickham H (2007). Reshaping Data with the reshape Package.
-_Journal of Statistical Software_, *21*(12), pp. 1-20. 
-http://www.jstatsoft.org/v21/i12/."><a href="http://www.jstatsoft.org/v21/i12/">Wickham, 2007</a></span>). You can use the <code>library</code> or the <code>require</code> function to load it.</p>
+    <p>One of the best ways to rearrange your data is to use the <code>reshape2</code> package (<a href="http://www.jstatsoft.org/v21/i12/">Wickham, 2007</a>). You can use the <code>library</code> or the <code>require</code> function to load it.</p>
 
 <p>You may get an error:</p>
 
@@ -1310,9 +1305,7 @@ head(depthday_dist, 2)
     <h2>ggplot2</h2>
   </hgroup>
   <article>
-    <p><code>ggplot2</code> is a package which allows you to build up complex plots from basic elements (<span rel="tooltip" title="Wickham H (2009). _ggplot2: elegant graphics for data analysis_.
-Springer New York. ISBN 978-0-387-98140-6, 
-http://had.co.nz/ggplot2/book."><a href="http://had.co.nz/ggplot2/book">Wickham, 2009</a></span>). First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
+    <p><code>ggplot2</code> is a package which allows you to build up complex plots from basic elements (<a href="http://had.co.nz/ggplot2/book">Wickham, 2009</a>). First we define the data of the plot in <code>ggplot</code>, then define the geoms.</p>
 
 <pre><code class="r">library(ggplot2)
 ggplot(depthday_dist, aes(x = Hour, y = meandepthday)) + geom_point()
@@ -1490,14 +1483,14 @@ abline(linear_model, col = &quot;blue&quot;, lwd = 2)
 
 <!-- LineChart generated in R 2.15.3 by googleVis 0.4.1 package -->
 
-<!-- Thu Mar 07 12:48:36 2013 -->
+<!-- Fri Mar  8 13:33:58 2013 -->
 
 <!-- jsHeader -->
 
 <script type="text/javascript">
  
 // jsData 
-function gvisDataLineChartID109440224f () {
+function gvisDataLineChartID10602b3c2abf () {
   var data = new google.visualization.DataTable();
   var datajson =
 [
@@ -8326,7 +8319,7 @@ function gvisDataLineChartID109440224f () {
 -9.65 
 ],
 [
- null,
+ new Date(2011,2,13,1,0,0),
 -9.65 
 ],
 [
@@ -27717,8 +27710,8 @@ return(data);
 }
  
 // jsDrawChart
-function drawChartLineChartID109440224f() {
-  var data = gvisDataLineChartID109440224f();
+function drawChartLineChartID10602b3c2abf() {
+  var data = gvisDataLineChartID10602b3c2abf();
   var options = {};
 options["allowHtml"] = true;
 options["width"] =   1000;
@@ -27730,7 +27723,7 @@ options["legend"] = "none";
 options["title"] = "Alaskan surface soil temperature";
 
      var chart = new google.visualization.LineChart(
-       document.getElementById('LineChartID109440224f')
+       document.getElementById('LineChartID10602b3c2abf')
      );
      chart.draw(data,options);
     
@@ -27739,7 +27732,7 @@ options["title"] = "Alaskan surface soil temperature";
   
  
 // jsDisplayChart
-function displayChartLineChartID109440224f() {
+function displayChartLineChartID10602b3c2abf() {
   var pkgs = window.__gvisPackages = window.__gvisPackages || [];
   var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
   var chartid = "corechart";
@@ -27754,7 +27747,7 @@ function displayChartLineChartID109440224f() {
     pkgs.push(chartid);
 
   // Add the drawChart function to the global list of callbacks
-  callbacks.push(drawChartLineChartID109440224f);
+  callbacks.push(drawChartLineChartID10602b3c2abf);
 
   window.clearTimeout(window.__gvisLoad);
   window.__gvisLoad = setTimeout(function() {
@@ -27771,12 +27764,12 @@ function displayChartLineChartID109440224f() {
 
 <!-- jsChart -->  
 
-<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID109440224f"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartLineChartID10602b3c2abf"></script>
  
 
 <!-- divChart -->
 
-<div id="LineChartID109440224f"
+<div id="LineChartID10602b3c2abf"
   style="width: 1000px; height: 500px;">
 </div>
 
@@ -27815,9 +27808,7 @@ function displayChartLineChartID109440224f() {
     <h2>This presentation!</h2>
   </hgroup>
   <article>
-    <p>This presentation was entirely made in R using some useful packages such as <a href="http://slidify.org">slidify</a> (<span rel="tooltip" title="Vaidyanathan R (2012). _slidify: Generate reproducible html5
-slides from R markdown_. R package version 0.3.3, 
-http://ramnathv.github.com/slidify/."><a href="http://ramnathv.github.com/slidify/">Vaidyanathan, 2012</a></span>). You can look at the source for it on <a href="https://github.com/sebastian-c/r-mar2013">GitHub</a>.</p>
+    <p>This presentation was entirely made in R using some useful packages such as <a href="http://slidify.org">slidify</a> (<a href="http://ramnathv.github.com/slidify/">Vaidyanathan, 2012</a>). You can look at the source for it on <a href="https://github.com/sebastian-c/r-mar2013">GitHub</a>.</p>
 
 <p><img src="images/thispresentation.png" alt=""></p>
 
@@ -27831,7 +27822,7 @@ http://ramnathv.github.com/slidify/."><a href="http://ramnathv.github.com/slidif
   </hgroup>
   <article>
     <ul>
-<li>Here is a new data set
+<li>Here is a new <a href="https://raw.github.com/sebastian-c/r-mar2013/gh-pages/training_dataset.csv">data set</a>
 
 <ul>
 <li>NRCS data of soil around Indonesia</li>
