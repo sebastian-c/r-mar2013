@@ -2,6 +2,9 @@
 title       : R Tutorial
 subtitle    : March 2013
 author      : Sebastian Campbell and José Padarian
+github:
+  user: sebastian-c
+  repo: r-mar2013
 job         : Use the left and right arrow keys to navigate slides.
 logo        : university_sydney_logo.png
 license     : by-nc-nd
