@@ -1,6 +1,11 @@
 .Rproj.user
 .Rhistory
 .RData
+
 *.md
+*.pdf
+*.R
+*.bak
 
 cache/
+test/
