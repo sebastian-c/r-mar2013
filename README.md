@@ -3,6 +3,8 @@ r-mar2013
 
 Tutorial for March R tutorial run by the Faculty of Agriculture and Environment at the University of Sydney. Made in [Slidify](http://slidify.org/).
 
+The slides themselves [can be seen on the web here](http://sebastian-c.github.com/r-mar2013).
+
 ## Authors
 - Sebastian Campbell - University of Sydney
 - José Padarian - University of Sydney
